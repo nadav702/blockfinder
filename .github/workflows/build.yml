@@ -72,25 +72,28 @@ jobs:
           echo "ok=$?" >> "$GITHUB_OUTPUT"
         continue-on-error: true
 
-      - name: Publish jar + log back to branch
+      - name: Publish jar + log to branch blockatlas-dist
         if: always()
+        env:
+          TOKEN: ${{ github.token }}
         run: |
-          mkdir -p dist
-          rm -f dist/*.jar dist/build.log dist/STATUS
-          cp build.log dist/build.log || true
-          cp gradle.properties dist/resolved-gradle.properties
-          ls build/libs/ 2>/dev/null | grep -v sources | while read f; do cp "build/libs/$f" dist/; done
-          if ls dist/*.jar >/dev/null 2>&1; then echo SUCCESS > dist/STATUS; else echo FAILED > dist/STATUS; fi
+          mkdir -p out
+          cp build.log out/build.log 2>/dev/null || true
+          cp gradle.properties out/resolved-gradle.properties
+          cp dist/api.txt out/ 2>/dev/null || true
+          for f in build/libs/*.jar; do case "$f" in *sources*) ;; *) [ -f "$f" ] && cp "$f" out/ ;; esac; done
+          if ls out/*.jar >/dev/null 2>&1; then echo SUCCESS > out/STATUS; else echo FAILED > out/STATUS; fi
+          echo "${GITHUB_SHA}" > out/SOURCE_COMMIT
+          cd out
+          git init -q -b dist
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
-          git add -f dist
-          git commit -m "Build output ($(cat dist/STATUS)) [skip ci]" || true
-          ok=0
-          for i in 1 2 3; do git pull --rebase -X theirs origin blockatlas && git push && { ok=1; break; }; sleep 3; done
-          [ "$ok" = 1 ] || { echo "::error::could not publish build output"; exit 1; }
+          git add -A
+          git commit -qm "Build $(cat STATUS) for ${GITHUB_SHA}"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dist:blockatlas-dist
 
       - uses: actions/upload-artifact@v5
         if: always()
         with:
           name: blockatlas
-          path: dist/
+          path: out/
