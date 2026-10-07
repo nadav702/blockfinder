@@ -13,6 +13,7 @@ jobs:
         run: |
           set +e
           set +e
+          set +e
           M=https://maven.fabricmc.net/net/fabricmc
           latest() { curl -s "$1" | grep -oP '(?<=<release>)[^<]+' || true ; }
           LN=$(latest $M/fabric-loom/net.fabricmc.fabric-loom.gradle.plugin/maven-metadata.xml)
