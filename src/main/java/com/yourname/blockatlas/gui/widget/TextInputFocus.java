@@ -1,6 +1,7 @@
 package com.yourname.blockatlas.gui.widget;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -9,9 +10,8 @@ import net.minecraft.network.chat.Component;
 /**
  * Invisible widget that sits over the search bar and becomes the screen's focused element.
  *
- * <p>Since 26.3 (SDL input) Minecraft only enables OS text input, and therefore only
- * delivers {@code charTyped} events, while the focused element reports
- * {@link #capturesInput()}. Our search bar is custom-drawn, so this proxy carries that
+ * <p>Since 26.3 (SDL input) Minecraft only delivers {@code charTyped} events after a focused text widget calls
+ * {@code Minecraft#onTextInputFocusChange}, which starts SDL text input. Our search bar is custom-drawn, so this proxy carries that
  * flag for it. Actual key handling stays in the screen.</p>
  */
 public final class TextInputFocus extends AbstractWidget {
@@ -23,6 +23,13 @@ public final class TextInputFocus extends AbstractWidget {
     }
 
     /** Like vanilla EditBox: tell Minecraft so it starts/stops SDL text input. */
+    @Override
+    public void setFocused(boolean focused) {
+        super.setFocused(focused);
+        Minecraft.getInstance().onTextInputFocusChange(this, focused);
+    }
+
+    /** Same as vanilla EditBox: tell SDL to start/stop sending typed characters. */
     @Override
     public void setFocused(boolean focused) {
         super.setFocused(focused);
