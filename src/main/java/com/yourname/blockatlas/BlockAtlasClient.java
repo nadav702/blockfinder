@@ -41,9 +41,9 @@ public final class BlockAtlasClient implements ClientModInitializer {
 
         KeyMapping.Category category = KeyMapping.Category.register(id("main"));
         openKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
-                "key.blockatlas.open", InputConstants.Type.KEYSYM, InputConstants.KEY_B, category));
+                "key.blockatlas.open", InputConstants.KEY_B, category));
         toggleKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
-                "key.blockatlas.toggle", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), category));
+                "key.blockatlas.toggle", InputConstants.UNKNOWN.getValue(), category));
 
         BoxRenderer.register();
         HudOverlay.register();

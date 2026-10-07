@@ -18,7 +18,7 @@ import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Block;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -545,9 +545,9 @@ public class BlockAtlasScreen extends Screen {
     public boolean keyPressed(KeyEvent event) {
         int key = event.key();
         int mods = event.modifiers();
-        boolean ctrl = (mods & (GLFW.GLFW_MOD_CONTROL | GLFW.GLFW_MOD_SUPER)) != 0;
+        boolean ctrl = (mods & (InputConstants.MOD_CONTROL | InputConstants.MOD_SUPER)) != 0;
 
-        if (key == GLFW.GLFW_KEY_ESCAPE) {
+        if (key == InputConstants.KEY_ESCAPE) {
             if (search.isFocused() && !search.text().isEmpty()) {
                 search.setText("");
                 onQueryChanged("");
@@ -556,7 +556,7 @@ public class BlockAtlasScreen extends Screen {
             onClose();
             return true;
         }
-        if (ctrl && key == GLFW.GLFW_KEY_F) {
+        if (ctrl && key == InputConstants.KEY_F) {
             search.setFocused(true);
             return true;
         }

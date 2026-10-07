@@ -3,7 +3,7 @@ package com.yourname.blockatlas.gui.widget;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 
 import java.util.function.Consumer;
 
@@ -136,11 +136,11 @@ public final class SearchField {
 
     public boolean keyPressed(int key, int modifiers) {
         if (!focused) return false;
-        boolean ctrl = (modifiers & (GLFW.GLFW_MOD_CONTROL | GLFW.GLFW_MOD_SUPER)) != 0;
+        boolean ctrl = (modifiers & (InputConstants.MOD_CONTROL | InputConstants.MOD_SUPER)) != 0;
         String before = text;
 
         switch (key) {
-            case GLFW.GLFW_KEY_BACKSPACE -> {
+            case InputConstants.KEY_BACKSPACE -> {
                 if (allSelected) {
                     text = "";
                     cursor = 0;
@@ -150,7 +150,7 @@ public final class SearchField {
                     cursor = from;
                 }
             }
-            case GLFW.GLFW_KEY_DELETE -> {
+            case InputConstants.KEY_DELETE -> {
                 if (allSelected) {
                     text = "";
                     cursor = 0;
@@ -159,21 +159,21 @@ public final class SearchField {
                     text = text.substring(0, cursor) + text.substring(to);
                 }
             }
-            case GLFW.GLFW_KEY_LEFT -> cursor = cursor > 0 ? (ctrl ? previousWord(cursor) : text.offsetByCodePoints(cursor, -1)) : 0;
-            case GLFW.GLFW_KEY_RIGHT -> cursor = cursor < text.length() ? text.offsetByCodePoints(cursor, 1) : text.length();
-            case GLFW.GLFW_KEY_HOME -> cursor = 0;
-            case GLFW.GLFW_KEY_END -> cursor = text.length();
-            case GLFW.GLFW_KEY_A -> {
+            case InputConstants.KEY_LEFT -> cursor = cursor > 0 ? (ctrl ? previousWord(cursor) : text.offsetByCodePoints(cursor, -1)) : 0;
+            case InputConstants.KEY_RIGHT -> cursor = cursor < text.length() ? text.offsetByCodePoints(cursor, 1) : text.length();
+            case InputConstants.KEY_HOME -> cursor = 0;
+            case InputConstants.KEY_END -> cursor = text.length();
+            case InputConstants.KEY_A -> {
                 if (!ctrl) return false;
                 allSelected = !text.isEmpty();
                 return true;
             }
-            case GLFW.GLFW_KEY_C -> {
+            case InputConstants.KEY_C -> {
                 if (!ctrl) return false;
                 Minecraft.getInstance().keyboardHandler.setClipboard(text);
                 return true;
             }
-            case GLFW.GLFW_KEY_V -> {
+            case InputConstants.KEY_V -> {
                 if (!ctrl) return false;
                 String clip = Minecraft.getInstance().keyboardHandler.getClipboard()
                         .replaceAll("[\\r\\n\\t]", " ");
