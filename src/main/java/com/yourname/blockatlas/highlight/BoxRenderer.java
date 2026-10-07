@@ -77,7 +77,8 @@ public final class BoxRenderer {
 
     public static void register() {
         LevelExtractionEvents.END_EXTRACTION.register(BoxRenderer::extract);
-        LevelRenderEvents.AFTER_TRANSLUCENT_TERRAIN.register(BoxRenderer::render);
+        // END_MAIN: after the main pass is closed (26.3 forbids uploads while a terrain pass is open).
+        LevelRenderEvents.END_MAIN.register(BoxRenderer::render);
     }
 
     public static void close() {
