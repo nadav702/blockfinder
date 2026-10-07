@@ -29,6 +29,36 @@ jobs:
           echo "::notice::loom=$LOOM loader=$LOADER fabric-api=$FAPI"
           cat gradle.properties
 
+      - name: Dump 26.3 API (diagnostics)
+        run: |
+          set +e
+          chmod +x gradlew
+          mkdir -p dist
+          CP=$(./gradlew -q printCompileClasspath --no-daemon | tail -1)
+          echo "$CP" | tr ':' '\n' > dist/classpath.txt
+          OUT=dist/api.txt; : > $OUT
+          for j in $(echo "$CP" | tr ':' ' '); do
+            unzip -Z1 "$j" 2>/dev/null | grep -E '\.class$' | grep -vE '\$[0-9]' | sed "s|^|$(basename $j) :: |" ; done \
+            | grep -E 'blaze3d/|client/renderer/RenderPipelines|StagedVertexBuffer|InputConstants|client/input/|lwjgl|sdl|glfw|rendering/v1/level/|rendering/v1/hud/|keymapping|KeyMapping|GuiGraphicsExtractor|RenderType' > dist/classes.txt
+          for c in com.mojang.blaze3d.platform.InputConstants 'com.mojang.blaze3d.platform.InputConstants$Type' \
+                   net.minecraft.client.renderer.RenderPipelines net.minecraft.client.renderer.StagedVertexBuffer \
+                   'net.minecraft.client.renderer.StagedVertexBuffer$ExecuteInfo' 'net.minecraft.client.renderer.StagedVertexBuffer$Draw' \
+                   com.mojang.blaze3d.systems.RenderSystem com.mojang.blaze3d.pipeline.RenderTarget \
+                   net.minecraft.client.input.KeyEvent net.minecraft.client.input.MouseButtonEvent net.minecraft.client.input.CharacterEvent \
+                   net.minecraft.client.input.InputWithModifiers net.minecraft.client.KeyMapping \
+                   net.minecraft.client.gui.GuiGraphicsExtractor net.minecraft.client.gui.screens.Screen \
+                   net.minecraft.world.level.chunk.LevelChunkSection \
+                   net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderContext \
+                   net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents ; do
+            echo "=================== $c" >> $OUT
+            javap -cp "$CP" -public "$c" >> $OUT 2>&1
+          done
+          for pat in RenderPipeline PrimitiveTopology GpuBufferSlice RenderPass GpuTextureView VertexFormat; do
+            C=$(grep -E "/$pat\.class$" dist/classes.txt | head -1 | sed 's/.* :: //; s/\.class$//; s|/|.|g')
+            echo "=================== $pat -> $C" >> $OUT
+            [ -n "$C" ] && javap -cp "$CP" -public "$C" >> $OUT 2>&1
+          done
+
       - name: Build
         id: build
         run: |
@@ -42,7 +72,7 @@ jobs:
         if: always()
         run: |
           mkdir -p dist
-          rm -f dist/*
+          rm -f dist/*.jar dist/build.log dist/STATUS
           cp build.log dist/build.log || true
           cp gradle.properties dist/resolved-gradle.properties
           ls build/libs/ 2>/dev/null | grep -v sources | while read f; do cp "build/libs/$f" dist/; done

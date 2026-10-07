@@ -47,3 +47,8 @@ jar {
         rename { "${it}_${inputs.properties.archivesName}" }
     }
 }
+
+tasks.register('printCompileClasspath') {
+    def cp = sourceSets.main.compileClasspath
+    doLast { println cp.files.join(File.pathSeparator) }
+}
