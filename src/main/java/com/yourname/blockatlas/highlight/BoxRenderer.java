@@ -170,7 +170,7 @@ public final class BoxRenderer {
                 .createCommandEncoder()
                 .createRenderPass(() -> "BlockAtlas highlights", colorTexture, Optional.empty(),
                         mainTarget.getDepthTextureView(), OptionalDouble.empty())) {
-            pass.setPipeline(pipeline);
+            pass.setPipeline(RenderSystem.getCompiledPipeline(pipeline));
             RenderSystem.bindDefaultUniforms(pass);
             pass.setUniform("DynamicTransforms", dynamicTransforms);
             pass.setVertexBuffer(0, info.vertexBuffer().slice());
