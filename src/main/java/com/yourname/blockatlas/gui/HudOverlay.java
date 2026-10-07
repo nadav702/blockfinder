@@ -2,6 +2,7 @@ package com.yourname.blockatlas.gui;
 
 import com.yourname.blockatlas.BlockAtlasClient;
 import com.yourname.blockatlas.config.BlockAtlasConfig;
+import com.yourname.blockatlas.freecam.Freecam;
 import com.yourname.blockatlas.gui.widget.Ui;
 import com.yourname.blockatlas.highlight.HighlightManager;
 import com.yourname.blockatlas.scan.BlockScanner;
@@ -42,6 +43,13 @@ public final class HudOverlay {
         BlockAtlasConfig cfg = BlockAtlasConfig.get();
         HighlightManager hm = HighlightManager.get();
         LocalPlayer player = mc.player;
+        if (player != null && Freecam.isActive() && !mc.options.hideGui) {
+            String label = Component.translatable("blockatlas.hud.freecam").getString();
+            int w = mc.font.width(label) + 16;
+            int cx = g.guiWidth() / 2;
+            Ui.card(g, cx - w / 2, 4, cx + w / 2, 18, 7, 0xEE0E1015, Ui.ACCENT);
+            Ui.textCenter(g, mc.font, label, cx, 7, Ui.ACCENT);
+        }
         if (!cfg.showHud || player == null || hm.activeBlocks().isEmpty()) return;
         if (mc.gui.screen() instanceof BlockAtlasScreen) return;
 

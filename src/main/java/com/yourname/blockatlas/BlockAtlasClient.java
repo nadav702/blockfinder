@@ -2,6 +2,7 @@ package com.yourname.blockatlas;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.yourname.blockatlas.config.BlockAtlasConfig;
+import com.yourname.blockatlas.freecam.Freecam;
 import com.yourname.blockatlas.gui.BlockAtlasScreen;
 import com.yourname.blockatlas.gui.HudOverlay;
 import com.yourname.blockatlas.highlight.BoxRenderer;
@@ -29,6 +30,7 @@ public final class BlockAtlasClient implements ClientModInitializer {
 
     public static KeyMapping openKey;
     public static KeyMapping toggleKey;
+    public static KeyMapping freecamKey;
 
     public static Identifier id(String path) {
         return Identifier.fromNamespaceAndPath(MOD_ID, path);
@@ -45,6 +47,10 @@ public final class BlockAtlasClient implements ClientModInitializer {
         toggleKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.blockatlas.toggle", InputConstants.UNKNOWN.getValue(), category));
 
+        freecamKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
+                "key.blockatlas.freecam", InputConstants.KEY_F6, category));
+
+        Freecam.register();
         BoxRenderer.register();
         HudOverlay.register();
 
@@ -75,12 +81,18 @@ public final class BlockAtlasClient implements ClientModInitializer {
             }
         }
 
+        while (freecamKey.consumeClick()) {
+            Freecam.toggle();
+        }
+
         if (client.level == null || client.player == null) {
+            Freecam.disable(false);
             BlockScanner.get().reset();
             HighlightManager.get().clearResults();
             return;
         }
 
+        Freecam.tick(client);
         BlockScanner.get().tick(client);
         HighlightManager.get().tick(client);
     }

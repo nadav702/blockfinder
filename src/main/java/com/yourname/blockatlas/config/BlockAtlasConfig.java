@@ -38,6 +38,8 @@ public final class BlockAtlasConfig {
     public boolean showHud = true;
     public boolean outlines = true;
     public boolean nearestBeam = true;
+    /** Freecam flying speed in blocks per tick (sprint triples it). */
+    public double freecamSpeed = 0.6;
 
     /** Main-thread time budget for scanning per client tick, in microseconds. */
     public int scanBudgetMicros = 3000;
@@ -109,6 +111,7 @@ public final class BlockAtlasConfig {
 
     private void sanitize() {
         range = clamp(range, MIN_RANGE, MAX_RANGE);
+        freecamSpeed = Math.max(0.05, Math.min(5.0, freecamSpeed));
         scanBudgetMicros = clamp(scanBudgetMicros, 500, 20000);
         rescanIntervalTicks = clamp(rescanIntervalTicks, 5, 400);
         maxRenderedBoxes = clamp(maxRenderedBoxes, 100, 20000);

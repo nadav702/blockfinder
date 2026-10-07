@@ -6,6 +6,7 @@ import com.yourname.blockatlas.gui.widget.BlockGrid;
 import com.yourname.blockatlas.gui.widget.PillButton;
 import com.yourname.blockatlas.gui.widget.SearchField;
 import com.yourname.blockatlas.gui.widget.Slider;
+import com.yourname.blockatlas.gui.widget.TextInputFocus;
 import com.yourname.blockatlas.gui.widget.Ui;
 import com.yourname.blockatlas.highlight.HighlightManager;
 import com.yourname.blockatlas.scan.BlockScanner;
@@ -55,6 +56,7 @@ public class BlockAtlasScreen extends Screen {
 
     private BlockCatalog catalog;
     private SearchField search;
+    private TextInputFocus searchFocus;
     private BlockGrid grid;
     private Slider rangeSlider, hueSlider, alphaSlider;
     private final List<PillButton> headerButtons = new ArrayList<>();
@@ -126,6 +128,9 @@ public class BlockAtlasScreen extends Screen {
         search.setPlaceholder(tr("blockatlas.search.placeholder"));
         search.setText(lastQuery);
         search.setFocused(true);
+        searchFocus = new TextInputFocus(listX, searchY, listW, 20, search);
+        addWidget(searchFocus);
+        syncTextInput();
 
         // category tabs (wrap to a second row on narrow screens)
         int tx = listX, ty = searchY + 26;
@@ -286,11 +291,22 @@ public class BlockAtlasScreen extends Screen {
         return minecraft == null ? 0 : minecraft.options.getEffectiveRenderDistance() * 16;
     }
 
+    /** Keeps the invisible text-input proxy focused exactly while the search bar is. */
+    private void syncTextInput() {
+        if (searchFocus == null) return;
+        if (search.isFocused()) {
+            if (getFocused() != searchFocus) setFocused(searchFocus);
+        } else if (getFocused() == searchFocus) {
+            setFocused(null);
+        }
+    }
+
     // ---- rendering --------------------------------------------------------------------------
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
         // Fully custom drawing; no vanilla background blur or widgets.
+        syncTextInput();
         Ui.rect(g, 0, 0, width, height, Ui.BACKDROP);
         Ui.card(g, px, py, px + pw, py + ph, 8, Ui.PANEL, Ui.PANEL_BORDER);
 
@@ -471,7 +487,9 @@ public class BlockAtlasScreen extends Screen {
         int button = event.button();
 
         if (button == 0) {
-            if (search.mouseClicked(mx, my)) return true;
+            boolean hitSearch = search.mouseClicked(mx, my);
+            syncTextInput();
+            if (hitSearch) return true;
             for (PillButton b : headerButtons) if (b.mouseClicked(mx, my)) return true;
             for (PillButton b : tabButtons) if (b.mouseClicked(mx, my)) return true;
             if (rangeSlider.mouseClicked(mx, my)) {
@@ -558,6 +576,7 @@ public class BlockAtlasScreen extends Screen {
         }
         if (ctrl && key == InputConstants.KEY_F) {
             search.setFocused(true);
+            syncTextInput();
             return true;
         }
         if (search.keyPressed(key, mods)) return true;

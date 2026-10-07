@@ -3,19 +3,26 @@
   "id": "blockatlas",
   "version": "${version}",
   "name": "BlockAtlas",
-  "description": "Browse every block in the game and highlight any of them through walls within up to 300 m. Multi-select, per-block colours, favourites and a live HUD.",
-  "authors": ["YourName"],
+  "description": "Browse every block and highlight any of them through walls within up to 300 m, plus a smooth client-side freecam.",
+  "authors": [
+    "YourName"
+  ],
   "contact": {},
   "license": "MIT",
   "icon": "assets/blockatlas/icon.png",
   "environment": "client",
   "entrypoints": {
-    "client": ["com.yourname.blockatlas.BlockAtlasClient"]
+    "client": [
+      "com.yourname.blockatlas.BlockAtlasClient"
+    ]
   },
   "depends": {
     "fabricloader": ">=0.19.5",
     "fabric-api": "*",
     "minecraft": "~26.3",
     "java": ">=25"
-  }
+  },
+  "mixins": [
+    "blockatlas.mixins.json"
+  ]
 }

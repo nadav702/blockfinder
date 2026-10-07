@@ -12,12 +12,17 @@ A client-side Fabric mod for **Minecraft Java 26.3** that lists every registered
 - Favourites (★) pinned to the top. Toggles for on/off, through walls and HUD, a range slider (16–300 m), and Clear all.
 - Settings persist in `config/blockatlas.json`.
 
+## Freecam
+
+Press **F6** to detach the camera and fly freely; press it again to return. Your character stays where it is (you can see it), and attacking or using items is blocked while flying. Controls: WASD to move, Space up, Shift down, Sprint for 3x speed, mouse to look. Speed is `freecamSpeed` in the config (default 0.6 blocks/tick).
+
 ## Controls
 
 | Action | Input |
 |---|---|
 | Open / close BlockAtlas | **B** (rebindable under Options → Controls → BlockAtlas) |
 | Toggle highlights on/off | Unbound by default; bind in Controls |
+| Toggle freecam | **F6** |
 | Highlight / un-highlight a block | Left-click its card |
 | Edit a block's colour without toggling | Right-click its card |
 | Favourite | Click the ☆ on a card |

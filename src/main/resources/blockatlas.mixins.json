@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.yourname.blockatlas.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "EntityTurnMixin",
+    "KeyboardInputMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

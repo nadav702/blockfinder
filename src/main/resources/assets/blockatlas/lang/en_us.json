@@ -2,14 +2,12 @@
   "key.category.blockatlas.main": "BlockAtlas",
   "key.blockatlas.open": "Open BlockAtlas",
   "key.blockatlas.toggle": "Toggle highlights",
-
   "blockatlas.title": "BlockAtlas",
   "blockatlas.subtitle": "%s blocks · %s highlighted",
   "blockatlas.search.placeholder": "Search by name or id…",
   "blockatlas.search.results": "%s results",
   "blockatlas.empty": "No blocks match your search",
   "blockatlas.footer": "Left-click: highlight  ·  Right-click: edit colour  ·  ★ favourite  ·  Ctrl+F: search",
-
   "blockatlas.category.all": "All",
   "blockatlas.category.ores": "Ores",
   "blockatlas.category.natural": "Natural",
@@ -18,36 +16,34 @@
   "blockatlas.category.decorative": "Decorative",
   "blockatlas.category.technical": "Technical",
   "blockatlas.category.active": "Active",
-
   "blockatlas.button.on": "Enabled",
   "blockatlas.button.off": "Disabled",
   "blockatlas.button.xray": "Through walls",
   "blockatlas.button.hud": "HUD",
   "blockatlas.button.clear": "Clear all",
-
   "blockatlas.range": "SCAN RANGE",
   "blockatlas.range.warn": "High range: may cost FPS",
   "blockatlas.range.ok": "Only loaded chunks are scanned",
   "blockatlas.range.loaded": "Loaded area ≈ %s m",
   "blockatlas.range.loaded_limited": "Limited by render distance (%s m)",
-
   "blockatlas.color": "COLOUR",
   "blockatlas.color.none": "Select a block to edit",
   "blockatlas.color.none2": "its highlight colour.",
   "blockatlas.color.hue": "Hue",
   "blockatlas.color.opacity": "Opacity",
-
   "blockatlas.active": "ACTIVE",
   "blockatlas.active.empty": "Nothing highlighted yet",
   "blockatlas.status.scanning": "Scanning %s%%",
   "blockatlas.status.live": "● Live",
   "blockatlas.status.paused": "Paused",
-
   "blockatlas.hud.total": "%s found · nearest %s",
   "blockatlas.hud.more": "+%s more",
   "blockatlas.hud.warn": "⚠ Range %s m: heavy scan",
-
   "blockatlas.chat.range_warning": "[BlockAtlas] Range set to %s m. Ranges above 200 m scan many chunks and can lower FPS; blocks are only found in chunks your client has loaded.",
   "blockatlas.chat.enabled": "[BlockAtlas] Highlights enabled",
-  "blockatlas.chat.disabled": "[BlockAtlas] Highlights disabled"
+  "blockatlas.chat.disabled": "[BlockAtlas] Highlights disabled",
+  "key.blockatlas.freecam": "Toggle freecam",
+  "blockatlas.freecam.on": "Freecam ON: WASD / Space / Shift to fly, Sprint = faster",
+  "blockatlas.freecam.off": "Freecam OFF",
+  "blockatlas.hud.freecam": "FREECAM"
 }
