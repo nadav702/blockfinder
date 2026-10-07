@@ -13,6 +13,7 @@ import com.yourname.blockatlas.scan.BlockScanner;
 import com.yourname.blockatlas.util.ColorUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.CharacterEvent;
 import net.minecraft.client.input.KeyEvent;
@@ -297,7 +298,7 @@ public class BlockAtlasScreen extends Screen {
         if (search.isFocused()) {
             if (getFocused() != searchFocus) setFocused(searchFocus);
         } else if (getFocused() == searchFocus) {
-            setFocused(null);
+            setFocused((GuiEventListener) null);
         }
     }
 

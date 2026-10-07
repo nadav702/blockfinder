@@ -12,7 +12,7 @@ import net.minecraft.client.Options;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.Marker;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -63,7 +63,7 @@ public final class Freecam {
         LocalPlayer player = mc.player;
         if (player == null || mc.level == null) return;
 
-        Marker cam = new Marker(EntityType.MARKER, mc.level);
+        Marker cam = new Marker(EntityTypes.MARKER, mc.level);
         Vec3 eye = player.getEyePosition();
         cam.setPos(eye.x, eye.y, eye.z);
         cam.xo = eye.x;
