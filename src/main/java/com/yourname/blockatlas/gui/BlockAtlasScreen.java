@@ -486,6 +486,7 @@ public class BlockAtlasScreen extends Screen {
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
         double mx = event.x(), my = event.y();
         int button = event.button();
+        BlockAtlasClient.LOGGER.info("[BlockAtlas debug] click button={} x={} y={} double={}", button, mx, my, doubleClick);
 
         if (button == InputConstants.MOUSE_BUTTON_LEFT) {
             boolean hitSearch = search.mouseClicked(mx, my);
@@ -564,6 +565,7 @@ public class BlockAtlasScreen extends Screen {
     public boolean keyPressed(KeyEvent event) {
         int key = event.key();
         int mods = event.modifiers();
+        BlockAtlasClient.LOGGER.info("[BlockAtlas debug] key={} mods={} searchFocused={}", key, mods, search.isFocused());
         boolean ctrl = (mods & (InputConstants.MOD_CONTROL | InputConstants.MOD_SUPER)) != 0;
 
         if (key == InputConstants.KEY_ESCAPE) {
@@ -591,6 +593,7 @@ public class BlockAtlasScreen extends Screen {
     @Override
     public boolean charTyped(CharacterEvent event) {
         int cp = event.codepoint();
+        BlockAtlasClient.LOGGER.info("[BlockAtlas debug] char={}", cp);
         if (!search.isFocused()) {
             // "type to search": any printable key focuses the search bar
             if (cp < 32) return false;
