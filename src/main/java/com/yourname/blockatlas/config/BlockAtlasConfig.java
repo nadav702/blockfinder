@@ -60,9 +60,9 @@ public final class BlockAtlasConfig {
     /** Stored positions per block type per dimension. */
     public int memoryMaxPerBlock = 1000000;
     /** Deep scan radius in blocks (singleplayer), 500..5000. */
-    public int deepScanRadius = 2000;
+    public int deepScanRadius = 5000;
     /** Deep scan also generates chunks that don't exist yet. */
-    public boolean deepScanGenerate = false;
+    public boolean deepScanGenerate = true;
 
     /** Freecam flying speed in blocks per tick (sprint triples it). */
     public double freecamSpeed = 0.6;

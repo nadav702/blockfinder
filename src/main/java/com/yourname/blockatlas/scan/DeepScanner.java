@@ -46,7 +46,7 @@ import java.util.function.Predicate;
 public final class DeepScanner {
     private static final DeepScanner INSTANCE = new DeepScanner();
     private static final int MAX_READS_IN_FLIGHT = 48;
-    private static final int MAX_GEN_IN_FLIGHT = 3;
+    private static final int MAX_GEN_IN_FLIGHT = 6;
     private static final Set<String> ORES_PLACED = Set.of(
             "minecraft:features", "minecraft:initialize_light", "minecraft:light", "minecraft:spawn", "minecraft:full");
 
@@ -291,7 +291,10 @@ public final class DeepScanner {
             if (n == 0) continue;
             Block[] match = null;
             for (int i = 0; i < n; i++) {
-                String name = palette.getCompoundOrEmpty(i).getStringOr("Name", "");
+                // 26.3 saves block states as {id, properties}; older saves used {Name, Properties}
+                CompoundTag entry = palette.getCompoundOrEmpty(i);
+                String name = entry.getStringOr("id", "");
+                if (name.isEmpty()) name = entry.getStringOr("Name", "");
                 Block b = targetsById.get(name);
                 if (b != null) {
                     if (match == null) match = new Block[n];
