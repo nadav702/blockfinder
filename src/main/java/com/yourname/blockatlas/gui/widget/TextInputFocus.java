@@ -1,7 +1,6 @@
 package com.yourname.blockatlas.gui.widget;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -23,13 +22,6 @@ public final class TextInputFocus extends AbstractWidget {
     }
 
     /** Like vanilla EditBox: tell Minecraft so it starts/stops SDL text input. */
-    @Override
-    public void setFocused(boolean focused) {
-        super.setFocused(focused);
-        Minecraft.getInstance().onTextInputFocusChange(this, focused);
-    }
-
-    /** Same as vanilla EditBox: tell SDL to start/stop sending typed characters. */
     @Override
     public void setFocused(boolean focused) {
         super.setFocused(focused);
