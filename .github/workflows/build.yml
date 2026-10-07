@@ -11,11 +11,19 @@ jobs:
         with: { gradle-version: '9.1.0' }
       - name: Use latest Fabric versions for 26.3
         run: |
+          M=https://maven.fabricmc.net/net/fabricmc
+          latest() { curl -s "$1" | grep -oP '(?<=<latest>)[^<]+' ; }
+          LN=$(latest $M/fabric-loom/net.fabricmc.fabric-loom.gradle.plugin/maven-metadata.xml)
+          LO=$(latest $M/fabric-loom/fabric-loom.gradle.plugin/maven-metadata.xml)
+          if [ -n "$LN" ]; then sed -i "s/^loom_version=.*/loom_version=$LN/" gradle.properties
+          else sed -i "s/^loom_version=.*/loom_version=$LO/; s/net.fabricmc.fabric-loom/fabric-loom/" gradle.properties build.gradle; fi
           L=$(curl -s https://meta.fabricmc.net/v2/versions/loader | jq -r '.[0].version')
           F=$(curl -s "https://api.modrinth.com/v2/project/fabric-api/version?game_versions=%5B%2226.3%22%5D&loaders=%5B%22fabric%22%5D" | jq -r '.[0].version_number')
+          G=$(curl -s https://meta.fabricmc.net/v2/versions/game | jq -r '.[].version' | grep -x '26.3' || true)
           [ -n "$L" ] && sed -i "s/^loader_version=.*/loader_version=$L/" gradle.properties
           [ -n "$F" ] && [ "$F" != null ] && sed -i "s/^fabric_version=.*/fabric_version=$F/" gradle.properties
-          cat gradle.properties
+          echo "::notice::loom new=$LN old=$LO loader=$L fabric-api=$F mc26.3=${G:-MISSING}"
+          echo "::notice::$(head -3 build.gradle | tr '\n' ' ')"
       - name: Build
         run: |
           set -o pipefail
