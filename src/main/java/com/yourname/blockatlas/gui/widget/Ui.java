@@ -14,8 +14,8 @@ public final class Ui {
     private Ui() {}
 
     // ---- palette ----------------------------------------------------------------------------
-    public static final int BACKDROP = 0xB0050608;
-    public static final int PANEL = 0xFF0E1015;
+    public static int BACKDROP = 0xB0050608;
+    public static int PANEL = 0xFF0E1015;
     public static final int PANEL_BORDER = 0xFF262B35;
     public static final int DIVIDER = 0xFF1A1E26;
     public static final int SURFACE = 0xFF161920;
@@ -27,11 +27,19 @@ public final class Ui {
     public static final int TEXT = 0xFFE9ECF1;
     public static final int TEXT_DIM = 0xFF9098A6;
     public static final int TEXT_FAINT = 0xFF5D6472;
-    public static final int ACCENT = 0xFF7C9CFF;
+    public static int ACCENT = 0xFF7C9CFF;
     public static final int WARN = 0xFFFFB454;
     public static final int DANGER = 0xFFFF6B6B;
     public static final int OK = 0xFF5BD69A;
     public static final int STAR = 0xFFFFC94A;
+
+    /** Re-reads accent colour and panel opacity from the config. Cheap; called every frame. */
+    public static void applyTheme() {
+        com.yourname.blockatlas.config.BlockAtlasConfig cfg = com.yourname.blockatlas.config.BlockAtlasConfig.get();
+        ACCENT = 0xFF000000 | cfg.accentColor;
+        PANEL = ColorUtil.argb(0x0E1015, cfg.panelOpacity);
+        BACKDROP = ColorUtil.argb(0x050608, 0.69f * cfg.panelOpacity);
+    }
 
     // ---- shapes -----------------------------------------------------------------------------
 
@@ -56,8 +64,18 @@ public final class Ui {
 
     /** Rounded card with a 1px border. Fill should be opaque for a crisp border. */
     public static void card(GuiGraphicsExtractor g, int x1, int y1, int x2, int y2, int radius, int fill, int border) {
-        roundRect(g, x1, y1, x2, y2, radius, border);
-        roundRect(g, x1 + 1, y1 + 1, x2 - 1, y2 - 1, Math.max(0, radius - 1), fill);
+        if ((fill >>> 24) == 0xFF) {
+            roundRect(g, x1, y1, x2, y2, radius, border);
+            roundRect(g, x1 + 1, y1 + 1, x2 - 1, y2 - 1, Math.max(0, radius - 1), fill);
+            return;
+        }
+        // translucent fill: draw the fill, then a thin outline so the border doesn't show through
+        roundRect(g, x1, y1, x2, y2, radius, fill);
+        int r = Math.min(radius, Math.min((x2 - x1) / 2, (y2 - y1) / 2));
+        rect(g, x1 + r, y1, x2 - r, y1 + 1, border);
+        rect(g, x1 + r, y2 - 1, x2 - r, y2, border);
+        rect(g, x1, y1 + r, x1 + 1, y2 - r, border);
+        rect(g, x2 - 1, y1 + r, x2, y2 - r, border);
     }
 
     public static void gradientV(GuiGraphicsExtractor g, int x1, int y1, int x2, int y2, int top, int bottom) {

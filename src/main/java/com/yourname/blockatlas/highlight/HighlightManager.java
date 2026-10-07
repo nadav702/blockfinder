@@ -153,6 +153,12 @@ public final class HighlightManager {
         dirty = true;
     }
 
+    /** Current in-range positions for a block (empty if none / not highlighted). */
+    public long[] results(Block block) {
+        long[] r = results.get(block);
+        return r == null ? new long[0] : r;
+    }
+
     public Stats stats(Block block) {
         return stats.get(block);
     }

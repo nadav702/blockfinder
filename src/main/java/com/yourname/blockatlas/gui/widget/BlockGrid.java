@@ -21,11 +21,14 @@ public final class BlockGrid {
         void onCard(BlockCatalog.Entry entry, Action action);
     }
 
-    private static final int CARD_H = 30;
-    private static final int GAP = 5;
     private static final int MIN_CARD_W = 136;
     private static final int BAR_W = 4;
-    private static final int ROW = CARD_H + GAP;
+
+    private final boolean gridMode;
+    private final boolean showIds;
+    private final int CARD_H;
+    private final int GAP;
+    private final int ROW;
 
     private final int x, y, w, h;
     private final int cols, cardW;
@@ -40,14 +43,19 @@ public final class BlockGrid {
     private boolean draggingBar;
     private double barGrab;
 
-    public BlockGrid(int x, int y, int w, int h, Listener listener) {
+    public BlockGrid(int x, int y, int w, int h, boolean gridMode, boolean showIds, Listener listener) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
         this.listener = listener;
+        this.gridMode = gridMode;
+        this.showIds = showIds;
+        this.CARD_H = gridMode ? (showIds ? 30 : 24) : 20;
+        this.GAP = gridMode ? 5 : 2;
+        this.ROW = CARD_H + GAP;
         int inner = w - BAR_W - 6;
-        this.cols = Math.max(1, (inner + GAP) / (MIN_CARD_W + GAP));
+        this.cols = gridMode ? Math.max(1, (inner + GAP) / (MIN_CARD_W + GAP)) : 1;
         this.cardW = (inner - (cols - 1) * GAP) / cols;
     }
 
@@ -158,14 +166,10 @@ public final class BlockGrid {
         int border = e == focused ? Ui.ACCENT
                 : active ? ColorUtil.mix(Ui.SURFACE_BORDER, color, 0.65f)
                 : hover ? Ui.BORDER_HOVER : Ui.SURFACE_BORDER;
-        Ui.card(g, cx, cy, cx + cardW, cy + CARD_H, 5, bg, border);
-        if (active) Ui.roundRect(g, cx + 2, cy + 7, cx + 4, cy + CARD_H - 7, 1, color);
+        Ui.card(g, cx, cy, cx + cardW, cy + CARD_H, gridMode ? 5 : 4, bg, border);
+        if (active) Ui.roundRect(g, cx + 2, cy + 5, cx + 4, cy + CARD_H - 5, 1, color);
 
-        Ui.icon(g, font, e.icon(), e.name(), color, cx + 8, cy + 7);
-
-        int textX = cx + 30;
-        int textW = cardW - 30 - 18;
-        Ui.text(g, font, Ui.trim(font, e.name(), textW), textX, cy + 6, Ui.TEXT);
+        Ui.icon(g, font, e.icon(), e.name(), color, cx + 8, cy + (CARD_H - 16) / 2);
 
         String countText = "";
         if (active) {
@@ -173,18 +177,35 @@ public final class BlockGrid {
             countText = s == null ? "…" : Ui.formatCount(s.count()) + (s.capped() ? "+" : "");
         }
         int countW = countText.isEmpty() ? 0 : font.width(countText) + 6;
-        Ui.text(g, font, Ui.trim(font, e.shortId(), cardW - 30 - 8 - countW), textX, cy + 17, Ui.TEXT_FAINT);
-        if (!countText.isEmpty()) Ui.textRight(g, font, countText, cx + cardW - 8, cy + 17, color);
+        int textX = cx + 30;
+        boolean twoLines = gridMode && showIds;
+        int lineY = twoLines ? cy + 6 : cy + (CARD_H - 8) / 2;
+        int starRoom = 18;
+
+        if (twoLines) {
+            Ui.text(g, font, Ui.trim(font, e.name(), cardW - 30 - starRoom), textX, lineY, Ui.TEXT);
+            Ui.text(g, font, Ui.trim(font, e.shortId(), cardW - 30 - 8 - countW), textX, cy + 17, Ui.TEXT_FAINT);
+            if (!countText.isEmpty()) Ui.textRight(g, font, countText, cx + cardW - 8, cy + 17, color);
+        } else {
+            int avail = cardW - 30 - starRoom - countW;
+            String name = Ui.trim(font, e.name(), avail);
+            Ui.text(g, font, name, textX, lineY, Ui.TEXT);
+            if (showIds) {
+                int idX = textX + font.width(name) + 8;
+                Ui.text(g, font, Ui.trim(font, e.shortId(), textX + avail - idX), idX, lineY, Ui.TEXT_FAINT);
+            }
+            if (!countText.isEmpty()) Ui.textRight(g, font, countText, cx + cardW - starRoom - 2, lineY, color);
+        }
 
         if (fav || hover) {
             boolean starHover = hover && overStar(cx, cy, mx, my);
             int starColor = fav ? Ui.STAR : starHover ? Ui.TEXT : Ui.TEXT_FAINT;
-            Ui.text(g, font, fav ? "★" : "☆", cx + cardW - 14, cy + 5, starColor);
+            Ui.text(g, font, fav ? "★" : "☆", cx + cardW - 14, twoLines ? cy + 5 : lineY, starColor);
         }
     }
 
     private boolean overStar(int cx, int cy, double mx, double my) {
-        return mx >= cx + cardW - 17 && mx < cx + cardW - 2 && my >= cy + 2 && my < cy + 15;
+        return mx >= cx + cardW - 17 && mx < cx + cardW - 2 && my >= cy && my < cy + CARD_H;
     }
 
     // ---- input ------------------------------------------------------------------------------

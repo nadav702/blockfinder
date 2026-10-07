@@ -5,6 +5,9 @@ import com.yourname.blockatlas.config.BlockAtlasConfig;
 import com.yourname.blockatlas.freecam.Freecam;
 import com.yourname.blockatlas.gui.BlockAtlasScreen;
 import com.yourname.blockatlas.gui.HudOverlay;
+import com.yourname.blockatlas.gui.MapScreen;
+import com.yourname.blockatlas.highlight.Target;
+import com.yourname.blockatlas.scan.BlockMemory;
 import com.yourname.blockatlas.highlight.BoxRenderer;
 import com.yourname.blockatlas.highlight.HighlightManager;
 import com.yourname.blockatlas.scan.BlockScanner;
@@ -31,6 +34,7 @@ public final class BlockAtlasClient implements ClientModInitializer {
     public static KeyMapping openKey;
     public static KeyMapping toggleKey;
     public static KeyMapping freecamKey;
+    public static KeyMapping mapKey;
 
     public static Identifier id(String path) {
         return Identifier.fromNamespaceAndPath(MOD_ID, path);
@@ -49,6 +53,8 @@ public final class BlockAtlasClient implements ClientModInitializer {
 
         freecamKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.blockatlas.freecam", InputConstants.KEY_F6, category));
+        mapKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
+                "key.blockatlas.map", InputConstants.KEY_M, category));
 
         Freecam.register();
         BoxRenderer.register();
@@ -57,6 +63,7 @@ public final class BlockAtlasClient implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(BlockAtlasClient::onEndTick);
         ClientLifecycleEvents.CLIENT_STOPPING.register(client -> {
             BlockAtlasConfig.get().save();
+            BlockMemory.get().unload();
             BoxRenderer.close();
         });
 
@@ -84,8 +91,14 @@ public final class BlockAtlasClient implements ClientModInitializer {
         while (freecamKey.consumeClick()) {
             Freecam.toggle();
         }
+        while (mapKey.consumeClick()) {
+            if (client.player != null) client.gui.setScreen(new MapScreen(null));
+        }
+
+        BlockMemory.get().tick(client);
 
         if (client.level == null || client.player == null) {
+            Target.clear();
             Freecam.disable(false);
             BlockScanner.get().reset();
             HighlightManager.get().clearResults();
@@ -93,6 +106,7 @@ public final class BlockAtlasClient implements ClientModInitializer {
         }
 
         Freecam.tick(client);
+        Target.tick(client);
         BlockScanner.get().tick(client);
         HighlightManager.get().tick(client);
     }

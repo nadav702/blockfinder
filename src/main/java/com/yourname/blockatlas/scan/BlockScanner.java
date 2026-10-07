@@ -3,6 +3,7 @@ package com.yourname.blockatlas.scan;
 import com.yourname.blockatlas.config.BlockAtlasConfig;
 import com.yourname.blockatlas.highlight.HighlightManager;
 import it.unimi.dsi.fastutil.longs.LongArrayList;
+import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
 import net.minecraft.client.Minecraft;
@@ -60,8 +61,11 @@ public final class BlockScanner {
     private int offsetIndex;
     private int originCx, originCz;
     private double originX, originY, originZ;
-    private int range;
-    private double rangeSq;
+    private int range;          // highlight radius
+    private int scanRadius;     // >= range: whole loaded area when block memory is on
+    private double rangeSq;     // squared scanRadius (what we scan)
+    private double highlightSq; // squared highlight range
+    private final LongOpenHashSet scannedChunks = new LongOpenHashSet();
     private int maxPerBlock;
 
     private BlockScanner() {}
@@ -125,16 +129,20 @@ public final class BlockScanner {
         targetPredicate = s -> t.contains(s.getBlock());
 
         range = cfg.range;
-        rangeSq = (double) range * range;
+        int loaded = Minecraft.getInstance().options.getEffectiveRenderDistance() * 16 + 16;
+        scanRadius = cfg.rememberBlocks ? Math.max(range, Math.min(loaded, 512)) : range;
+        rangeSq = (double) scanRadius * scanRadius;
+        highlightSq = (double) range * range;
+        scannedChunks.clear();
         maxPerBlock = cfg.maxResultsPerBlock;
         originX = player.getX();
         originY = player.getEyeY();
         originZ = player.getZ();
         originCx = BlockPos.containing(originX, originY, originZ).getX() >> 4;
         originCz = BlockPos.containing(originX, originY, originZ).getZ() >> 4;
-        if (offsetsRange != range) {
-            offsets = buildOffsets(range);
-            offsetsRange = range;
+        if (offsetsRange != scanRadius) {
+            offsets = buildOffsets(scanRadius);
+            offsetsRange = scanRadius;
         }
         offsetIndex = 0;
         found.clear();
@@ -175,11 +183,13 @@ public final class BlockScanner {
             offsetIndex++;
             if (!level.hasChunk(cx, cz)) continue;
             LevelChunk chunk = level.getChunk(cx, cz);
+            scannedChunks.add(BlockMemory.chunkKey(cx, cz));
             scanChunk(chunk, cx, cz);
         }
 
         if (offsetIndex >= total) {
             hm.publish(snapshot(), true, new ReferenceOpenHashSet<>(capped));
+            BlockMemory.get().merge(fullSnapshot(), scannedChunks, originX, originY, originZ, scanRadius);
             state = State.COOLDOWN;
             cooldown = cfg.rescanIntervalTicks;
             return;
@@ -191,7 +201,30 @@ public final class BlockScanner {
         }
     }
 
+    /** Positions within the highlight range (what gets boxes). */
     private Map<Block, long[]> snapshot() {
+        Map<Block, long[]> out = new HashMap<>(found.size() * 2);
+        for (var e : found.reference2ObjectEntrySet()) {
+            LongArrayList all = e.getValue();
+            if (scanRadius == range) {
+                out.put(e.getKey(), all.toLongArray());
+                continue;
+            }
+            LongArrayList near = new LongArrayList(all.size());
+            for (int i = 0; i < all.size(); i++) {
+                long p = all.getLong(i);
+                double dx = BlockPos.getX(p) + 0.5 - originX;
+                double dy = BlockPos.getY(p) + 0.5 - originY;
+                double dz = BlockPos.getZ(p) + 0.5 - originZ;
+                if (dx * dx + dy * dy + dz * dz <= highlightSq) near.add(p);
+            }
+            out.put(e.getKey(), near.toLongArray());
+        }
+        return out;
+    }
+
+    /** Everything found in the whole scan radius (for block memory). */
+    private Map<Block, long[]> fullSnapshot() {
         Map<Block, long[]> out = new HashMap<>(found.size() * 2);
         for (var e : found.reference2ObjectEntrySet()) out.put(e.getKey(), e.getValue().toLongArray());
         return out;
@@ -201,8 +234,8 @@ public final class BlockScanner {
         LevelChunkSection[] sections = chunk.getSections();
         int baseX = cx << 4;
         int baseZ = cz << 4;
-        double minY = originY - range;
-        double maxY = originY + range;
+        double minY = originY - scanRadius;
+        double maxY = originY + scanRadius;
 
         for (int i = 0; i < sections.length; i++) {
             LevelChunkSection section = sections[i];

@@ -74,6 +74,9 @@ public final class BoxRenderer {
     private static boolean frameThroughWalls;
     private static boolean frameOutlines;
     private static boolean frameBeams;
+    private static boolean frameTarget;
+    private static long frameTargetPos;
+    private static int frameViewBlocks;
 
     public static void register() {
         LevelExtractionEvents.END_EXTRACTION.register(BoxRenderer::extract);
@@ -93,13 +96,16 @@ public final class BoxRenderer {
         frameThroughWalls = cfg.seeThroughWalls;
         frameOutlines = cfg.outlines;
         frameBeams = cfg.nearestBeam;
+        frameTarget = Target.isSet();
+        frameTargetPos = Target.pos();
+        frameViewBlocks = Minecraft.getInstance().options.getEffectiveRenderDistance() * 16;
     }
 
     // ---- drawing phase ----------------------------------------------------------------------
 
     private static void render(LevelRenderContext context) {
         HighlightManager.RenderList list = frame;
-        if (list.count() == 0 && list.beams().length == 0) return;
+        if (list.count() == 0 && list.beams().length == 0 && !frameTarget) return;
 
         RenderPipeline pipeline = frameThroughWalls ? THROUGH_WALLS : WITH_DEPTH;
         VertexFormat format = pipeline.getVertexFormatBinding(0);
@@ -114,7 +120,7 @@ public final class BoxRenderer {
         Vec3 cam = context.levelState().cameraRenderState.pos;
         float grow = frameThroughWalls ? 0.001f : 0.003f; // avoid z-fighting with the block itself
 
-        int budget = BUFFER_BYTES - list.beams().length * FACE_BYTES;
+        int budget = BUFFER_BYTES - (list.beams().length + 2) * FACE_BYTES;
         int outlined = frameOutlines ? Math.min(list.count(), MAX_OUTLINED) : 0;
         budget -= outlined * EDGE_BYTES;
         int faces = Math.min(list.count(), Math.max(0, budget / FACE_BYTES));
@@ -148,6 +154,28 @@ public final class BoxRenderer {
                 int c = beamColors[i];
                 filledBox(vc, pose, cx - BEAM_HALF, by, cz - BEAM_HALF, cx + BEAM_HALF, by + BEAM_HEIGHT, cz + BEAM_HALF,
                         ((c >> 16) & 255) / 255f, ((c >> 8) & 255) / 255f, (c & 255) / 255f, 0.45f);
+            }
+        }
+
+        if (frameTarget) {
+            // Gold navigation beacon. Far targets are pulled in along the view direction so the
+            // beam stays inside the draw distance; it gets wider with distance to stay visible.
+            double tx = BlockPos.getX(frameTargetPos) + 0.5 - cam.x;
+            double ty = BlockPos.getY(frameTargetPos) - cam.y;
+            double tz = BlockPos.getZ(frameTargetPos) + 0.5 - cam.z;
+            double horiz = Math.sqrt(tx * tx + tz * tz);
+            double maxD = Math.max(32, frameViewBlocks * 0.85);
+            if (horiz > maxD) {
+                tx = tx / horiz * maxD;
+                tz = tz / horiz * maxD;
+            }
+            float half = (float) Math.max(0.2, Math.min(horiz, maxD) * 0.006);
+            float bx = (float) tx, by = (float) ty, bz = (float) tz;
+            filledBox(vc, pose, bx - half, by - 32, bz - half, bx + half, by + 320, bz + half, 1f, 0.79f, 0.29f, 0.55f);
+            if (horiz <= maxD) {
+                float g2 = 0.02f;
+                filledBox(vc, pose, bx - 0.5f - g2, by - g2, bz - 0.5f - g2, bx + 0.5f + g2, by + 1 + g2, bz + 0.5f + g2,
+                        1f, 0.79f, 0.29f, 0.5f);
             }
         }
 

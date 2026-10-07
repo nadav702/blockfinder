@@ -14,7 +14,6 @@ import com.yourname.blockatlas.util.ColorUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.events.GuiEventListener;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.CharacterEvent;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
@@ -41,7 +40,7 @@ import java.util.Locale;
  * └──────────────────────────────────────────────────────────────────────────────────────────┘
  * </pre>
  */
-public class BlockAtlasScreen extends Screen {
+public class BlockAtlasScreen extends ScaledScreen {
     private static final int[] PRESETS = {
             0xFF5555, 0xFFA040, 0xFFE14D, 0x55FF77, 0x4DE8FF, 0x5C7CFF, 0xC77DFF, 0xFFFFFF
     };
@@ -79,10 +78,7 @@ public class BlockAtlasScreen extends Screen {
         super(Component.translatable("blockatlas.title"));
     }
 
-    @Override
-    public boolean isPauseScreen() {
-        return false;
-    }
+    private long openedAt;
 
     private static String tr(String key, Object... args) {
         return Component.translatable(key, args).getString();
@@ -91,15 +87,16 @@ public class BlockAtlasScreen extends Screen {
     // ---- layout -----------------------------------------------------------------------------
 
     @Override
-    protected void init() {
+    protected void initScaled() {
+        openedAt = System.currentTimeMillis();
         catalog = BlockCatalog.get();
         headerButtons.clear();
         tabButtons.clear();
 
-        pw = Math.min(width - 16, 780);
-        ph = Math.min(height - 16, 460);
-        px = (width - pw) / 2;
-        py = (height - ph) / 2;
+        pw = Math.min(sw - 16, 780);
+        ph = Math.min(sh - 16, 460);
+        px = (sw - pw) / 2;
+        py = (sh - ph) / 2;
 
         sideW = pw >= 620 ? 172 : 150;
         sideX = px + pw - 12 - sideW;
@@ -108,6 +105,10 @@ public class BlockAtlasScreen extends Screen {
 
         // header buttons, right-aligned
         int bx = px + pw - 12;
+        bx = addHeaderButton(bx, () -> "⚙", "⚙", () -> false, Ui.ACCENT,
+                () -> minecraft.gui.setScreen(new SettingsScreen(this)));
+        bx = addHeaderButton(bx, () -> tr("blockatlas.button.map"), tr("blockatlas.button.map"), () -> false, Ui.ACCENT,
+                () -> minecraft.gui.setScreen(new MapScreen(this)));
         bx = addHeaderButton(bx, () -> tr("blockatlas.button.clear"), tr("blockatlas.button.clear"),
                 () -> false, Ui.DANGER, this::clearAll);
         bx = addHeaderButton(bx, () -> tr("blockatlas.button.hud"), tr("blockatlas.button.hud"),
@@ -151,7 +152,7 @@ public class BlockAtlasScreen extends Screen {
         listY = ty + 24;
         footerY = py + ph - 16;
         listH = Math.max(40, footerY - 6 - listY);
-        grid = new BlockGrid(listX, listY, listW, listH, this::onCard);
+        grid = new BlockGrid(listX, listY, listW, listH, cfg.gridLayout, cfg.showIds, this::onCard);
         grid.setEmptyMessage(tr("blockatlas.empty"));
 
         // sidebar
@@ -305,10 +306,9 @@ public class BlockAtlasScreen extends Screen {
     // ---- rendering --------------------------------------------------------------------------
 
     @Override
-    public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+    protected void extractScaled(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
         // Fully custom drawing; no vanilla background blur or widgets.
         syncTextInput();
-        Ui.rect(g, 0, 0, width, height, Ui.BACKDROP);
         Ui.card(g, px, py, px + pw, py + ph, 8, Ui.PANEL, Ui.PANEL_BORDER);
 
         // header
@@ -483,7 +483,8 @@ public class BlockAtlasScreen extends Screen {
     // ---- input ------------------------------------------------------------------------------
 
     @Override
-    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+    public boolean mouseClicked(MouseButtonEvent raw, boolean doubleClick) {
+        MouseButtonEvent event = scaled(raw);
         double mx = event.x(), my = event.y();
         int button = event.button();
 
@@ -521,17 +522,18 @@ public class BlockAtlasScreen extends Screen {
         }
         if (clickActiveList(mx, my, button)) return true;
         if (grid.mouseClicked(mx, my, button)) return true;
-        return super.mouseClicked(event, doubleClick);
+        return super.mouseClicked(raw, doubleClick);
     }
 
     @Override
-    public boolean mouseDragged(MouseButtonEvent event, double dragX, double dragY) {
+    public boolean mouseDragged(MouseButtonEvent raw, double dragX, double dragY) {
+        MouseButtonEvent event = scaled(raw);
         if (dragging != null) {
             dragging.drag(event.x());
             return true;
         }
         if (grid.mouseDragged(event.y())) return true;
-        return super.mouseDragged(event, dragX, dragY);
+        return super.mouseDragged(raw, dragX, dragY);
     }
 
     @Override
@@ -548,7 +550,8 @@ public class BlockAtlasScreen extends Screen {
     }
 
     @Override
-    public boolean mouseScrolled(double mx, double my, double scrollX, double scrollY) {
+    public boolean mouseScrolled(double rawX, double rawY, double scrollX, double scrollY) {
+        double mx = sx(rawX), my = sy(rawY);
         if (grid.contains(mx, my)) {
             grid.scroll(scrollY);
             return true;
@@ -557,7 +560,7 @@ public class BlockAtlasScreen extends Screen {
             activeScroll -= (int) Math.signum(scrollY);
             return true;
         }
-        return super.mouseScrolled(mx, my, scrollX, scrollY);
+        return super.mouseScrolled(rawX, rawY, scrollX, scrollY);
     }
 
     @Override
@@ -581,6 +584,10 @@ public class BlockAtlasScreen extends Screen {
             return true;
         }
         if (search.keyPressed(key, mods)) return true;
+        if (!search.isFocused() && BlockAtlasClient.mapKey.matches(event)) {
+            minecraft.gui.setScreen(new MapScreen(this));
+            return true;
+        }
         if (!search.isFocused() && BlockAtlasClient.openKey.matches(event)) {
             onClose();
             return true;
@@ -591,6 +598,8 @@ public class BlockAtlasScreen extends Screen {
     @Override
     public boolean charTyped(CharacterEvent event) {
         int cp = event.codepoint();
+        // the B press that opened the menu can arrive as a typed character right after opening
+        if (System.currentTimeMillis() - openedAt < 150) return true;
         if (!search.isFocused()) {
             // "type to search": any printable key focuses the search bar
             if (cp < 32) return false;
