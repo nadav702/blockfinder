@@ -1,5 +1,13 @@
-name: Build Block Finder jar
-on: [push, workflow_dispatch]
+name: Build BlockAtlas jar
+on:
+  push:
+    branches: [blockatlas]
+    paths-ignore: ['dist/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -7,34 +15,46 @@ jobs:
       - uses: actions/checkout@v5
       - uses: actions/setup-java@v5
         with: { distribution: temurin, java-version: '25' }
-      - uses: gradle/actions/setup-gradle@v5
-        with: { gradle-version: 'current' }
-      - name: Use latest Fabric versions for 26.3
+
+      - name: Resolve latest Fabric versions for 26.3
         run: |
-          set +e
-          set +e
           set +e
           M=https://maven.fabricmc.net/net/fabricmc
-          latest() { curl -s "$1" | grep -oP '(?<=<release>)[^<]+' || true ; }
-          LN=$(latest $M/fabric-loom/net.fabricmc.fabric-loom.gradle.plugin/maven-metadata.xml)
-          LO=$(latest $M/fabric-loom/fabric-loom.gradle.plugin/maven-metadata.xml)
-          if [ -n "$LN" ]; then sed -i "s/^loom_version=.*/loom_version=$LN/" gradle.properties
-          else sed -i "s/^loom_version=.*/loom_version=$LO/; s/net.fabricmc.fabric-loom/fabric-loom/" gradle.properties build.gradle; fi
-          L=$(curl -s https://meta.fabricmc.net/v2/versions/loader | jq -r '.[0].version')
-          F=$(curl -s "https://api.modrinth.com/v2/project/fabric-api/version?game_versions=%5B%2226.3%22%5D&loaders=%5B%22fabric%22%5D" | jq -r '.[0].version_number')
-          G=$(curl -s https://meta.fabricmc.net/v2/versions/game | jq -r '.[].version' | grep -x '26.3' || true)
-          [ -n "$L" ] && sed -i "s/^loader_version=.*/loader_version=$L/" gradle.properties
-          [ -n "$F" ] && [ "$F" != null ] && sed -i "s/^fabric_version=.*/fabric_version=$F/" gradle.properties
-          echo "::notice::loom new=$LN old=$LO loader=$L fabric-api=$F mc26.3=${G:-MISSING}"
-          echo "::notice::$(head -3 build.gradle | tr '\n' ' ')"
+          LOOM=$(curl -s $M/fabric-loom/net.fabricmc.fabric-loom.gradle.plugin/maven-metadata.xml | grep -oP '(?<=<release>)[^<]+')
+          LOADER=$(curl -s https://meta.fabricmc.net/v2/versions/loader | jq -r '[.[] | select(.stable)][0].version')
+          FAPI=$(curl -s "https://api.modrinth.com/v2/project/fabric-api/version?game_versions=%5B%2226.3%22%5D&loaders=%5B%22fabric%22%5D" | jq -r '.[0].version_number')
+          [ -n "$LOOM" ] && sed -i "s/^loom_version=.*/loom_version=$LOOM/" gradle.properties
+          [ -n "$LOADER" ] && [ "$LOADER" != null ] && sed -i "s/^loader_version=.*/loader_version=$LOADER/" gradle.properties
+          [ -n "$FAPI" ] && [ "$FAPI" != null ] && sed -i "s/^fabric_api_version=.*/fabric_api_version=$FAPI/" gradle.properties
+          echo "::notice::loom=$LOOM loader=$LOADER fabric-api=$FAPI"
+          cat gradle.properties
+
       - name: Build
+        id: build
         run: |
+          chmod +x gradlew
           set -o pipefail
-          if ! gradle build --no-daemon 2>&1 | tee build.log; then
-            grep -E "error:|What went wrong|Could not|not found|Exception|^> |cannot find symbol|symbol:|location:" build.log | head -60 | while IFS= read -r l; do echo "::error::$l"; done
-            exit 1
-          fi
+          ./gradlew build --no-daemon --stacktrace 2>&1 | tee build.log
+          echo "ok=$?" >> "$GITHUB_OUTPUT"
+        continue-on-error: true
+
+      - name: Publish jar + log back to branch
+        if: always()
+        run: |
+          mkdir -p dist
+          rm -f dist/*
+          cp build.log dist/build.log || true
+          cp gradle.properties dist/resolved-gradle.properties
+          ls build/libs/ 2>/dev/null | grep -v sources | while read f; do cp "build/libs/$f" dist/; done
+          if ls dist/*.jar >/dev/null 2>&1; then echo SUCCESS > dist/STATUS; else echo FAILED > dist/STATUS; fi
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add -f dist
+          git commit -m "Build output ($(cat dist/STATUS)) [skip ci]" || true
+          git push
+
       - uses: actions/upload-artifact@v5
+        if: always()
         with:
-          name: blockfinder-jar
-          path: build/libs/*.jar
+          name: blockatlas
+          path: dist/

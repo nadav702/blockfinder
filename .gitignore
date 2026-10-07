@@ -1,3 +1,7 @@
-build/
 .gradle/
-*.zip
+build/
+out/
+run/
+*.iml
+.idea/
+.vscode/

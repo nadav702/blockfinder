@@ -1,12 +1,49 @@
-plugins { id 'net.fabricmc.fabric-loom' version "${loom_version}" }
+plugins {
+    // Non-remapping Loom: the plugin id for Minecraft 26.1 and newer (unobfuscated game jars).
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
+}
+
 version = project.mod_version
-group = 'com.blockfinder'
-base { archivesName = 'blockfinder' }
-repositories { mavenCentral() }
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    // Loom adds the Mojang and Fabric repositories automatically.
+}
+
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
+
+    // On unobfuscated versions mods are ordinary dependencies (no modImplementation / remapping).
     implementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 }
-processResources { inputs.property "version", version; filesMatching("fabric.mod.json") { expand "version": version } }
-java { toolchain.languageVersion = JavaLanguageVersion.of(25) }
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": inputs.properties.version
+    }
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+    it.options.release = 25
+}
+
+jar {
+    inputs.property "archivesName", project.base.archivesName
+    from("LICENSE") {
+        rename { "${it}_${inputs.properties.archivesName}" }
+    }
+}
