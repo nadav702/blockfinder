@@ -470,7 +470,7 @@ public class BlockAtlasScreen extends Screen {
         int i = index + activeScroll;
         if (i < 0 || i >= blocks.size()) return true;
         Block b = blocks.get(i);
-        if (button == 0 && mx >= x2 - 20) {
+        if (button == InputConstants.MOUSE_BUTTON_LEFT && mx >= x2 - 20) {
             hm.remove(b);
             if (category == Category.ACTIVE) refilter(false);
         } else {
@@ -486,7 +486,7 @@ public class BlockAtlasScreen extends Screen {
         double mx = event.x(), my = event.y();
         int button = event.button();
 
-        if (button == 0) {
+        if (button == InputConstants.MOUSE_BUTTON_LEFT) {
             boolean hitSearch = search.mouseClicked(mx, my);
             syncTextInput();
             if (hitSearch) return true;

@@ -43,7 +43,7 @@ public final class HudOverlay {
         BlockAtlasConfig cfg = BlockAtlasConfig.get();
         HighlightManager hm = HighlightManager.get();
         LocalPlayer player = mc.player;
-        if (player != null && Freecam.isActive() && !mc.options.hideGui) {
+        if (player != null && Freecam.isActive()) {
             String label = Component.translatable("blockatlas.hud.freecam").getString();
             int w = mc.font.width(label) + 16;
             int cx = g.guiWidth() / 2;

@@ -1,5 +1,6 @@
 package com.yourname.blockatlas.gui.widget;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.yourname.blockatlas.config.BlockAtlasConfig;
 import com.yourname.blockatlas.gui.BlockCatalog;
 import com.yourname.blockatlas.highlight.HighlightManager;
@@ -192,7 +193,7 @@ public final class BlockGrid {
         if (!contains(mx, my)) return false;
 
         double max = maxScroll();
-        if (button == 0 && max > 0 && mx >= x + w - BAR_W - 2) {
+        if (button == InputConstants.MOUSE_BUTTON_LEFT && max > 0 && mx >= x + w - BAR_W - 2) {
             int thumbH = Math.max(20, (int) (h * (h / (double) (h + max))));
             int thumbY = y + (int) ((h - thumbH) * (scroll / max));
             draggingBar = true;
@@ -211,9 +212,9 @@ public final class BlockGrid {
         BlockCatalog.Entry e = entries.get(index);
         int cx = x + col * (cardW + GAP);
         int cy = y + row * ROW - (int) Math.round(scroll);
-        if (button == 0) {
+        if (button == InputConstants.MOUSE_BUTTON_LEFT) {
             listener.onCard(e, overStar(cx, cy, mx, my) ? Action.FAVORITE : Action.TOGGLE);
-        } else if (button == 1) {
+        } else if (button == InputConstants.MOUSE_BUTTON_RIGHT) {
             listener.onCard(e, Action.FOCUS);
         }
         return true;
