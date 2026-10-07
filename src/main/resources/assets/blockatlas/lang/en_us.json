@@ -82,5 +82,18 @@
   "blockatlas.settings.remember_on": "Remember found blocks: on",
   "blockatlas.settings.remember_off": "Remember found blocks: off",
   "blockatlas.settings.forget": "Forget this world's blocks",
-  "blockatlas.settings.forget_confirm": "Click again to confirm"
+  "blockatlas.settings.forget_confirm": "Click again to confirm",
+  "blockatlas.deep.title": "DEEP SCAN (SINGLEPLAYER)",
+  "blockatlas.deep.sp_only": "Deep scan works in singleplayer worlds: it reads the saved world from your disk.",
+  "blockatlas.deep.no_targets": "Highlight blocks first (B)",
+  "blockatlas.deep.radius": "Radius",
+  "blockatlas.deep.gen_on": "Generate missing: ON (slow)",
+  "blockatlas.deep.gen_off": "Generate missing: off",
+  "blockatlas.deep.start": "Start deep scan",
+  "blockatlas.deep.stop": "Stop",
+  "blockatlas.deep.idle": "Scans highlighted blocks in saved chunks",
+  "blockatlas.deep.progress": "%s / %s chunks (%s%%)",
+  "blockatlas.deep.done": "Done",
+  "blockatlas.deep.stopped": "Stopped",
+  "blockatlas.deep.stats": "Found %s · gen %s · empty %s"
 }

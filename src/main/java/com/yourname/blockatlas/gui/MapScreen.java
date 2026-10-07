@@ -4,6 +4,8 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.yourname.blockatlas.BlockAtlasClient;
 import com.yourname.blockatlas.config.BlockAtlasConfig;
 import com.yourname.blockatlas.gui.widget.PillButton;
+import com.yourname.blockatlas.gui.widget.Slider;
+import com.yourname.blockatlas.scan.DeepScanner;
 import com.yourname.blockatlas.gui.widget.Ui;
 import com.yourname.blockatlas.highlight.HighlightManager;
 import com.yourname.blockatlas.highlight.Target;
@@ -36,7 +38,8 @@ public class MapScreen extends ScaledScreen {
     private static final double MIN_ZOOM = 1 / 32.0, MAX_ZOOM = 8.0;
     private static final int SIDE_W = 168;
     private static final int ROW_H = 16;
-    private static final int MAX_MARKERS = 12000;
+    private static final int MAX_MARKERS = 25000;
+    private static final int DEEP_H = 118;
 
     private static final Set<Block> hidden = new HashSet<>();
     private static double zoom = 1.0;
@@ -54,7 +57,11 @@ public class MapScreen extends ScaledScreen {
     private long openedAt;
 
     // layout
-    private int px, py, pw, ph, mapX, mapY, mapW, mapH, sideX, listY, listBottom;
+    private int px, py, pw, ph, mapX, mapY, mapW, mapH, sideX, listY, listBottom, deepY;
+    private Slider deepRadius;
+    private boolean draggingRadius;
+    private PillButton genToggle, startStop;
+    private String deepError;
 
     // per-frame hover
     private Block hoverBlock;
@@ -100,7 +107,30 @@ public class MapScreen extends ScaledScreen {
         addButton(bx, "−", () -> false, () -> zoomAt(mapX + mapW / 2.0, mapY + mapH / 2.0, 0.5));
 
         listY = mapY + 30;
-        listBottom = py + ph - 10;
+        deepY = py + ph - 10 - DEEP_H;
+        listBottom = deepY - 6;
+
+        deepRadius = new Slider(sideX + 10, deepY + 34, SIDE_W - 20, false, v -> {
+            cfg.deepScanRadius = 500 + (int) Math.round(v * 4500 / 250.0) * 250;
+        });
+        deepRadius.setValue((cfg.deepScanRadius - 500) / 4500.0);
+        genToggle = new PillButton(sideX + 10, deepY + 46, SIDE_W - 20, 14,
+                () -> tr(cfg.deepScanGenerate ? "blockatlas.deep.gen_on" : "blockatlas.deep.gen_off"),
+                () -> cfg.deepScanGenerate, Ui.WARN, () -> {
+                    cfg.deepScanGenerate = !cfg.deepScanGenerate;
+                    cfg.save();
+                });
+        startStop = new PillButton(sideX + 10, deepY + 64, SIDE_W - 20, 16,
+                () -> tr(DeepScanner.get().running() ? "blockatlas.deep.stop" : "blockatlas.deep.start"),
+                () -> DeepScanner.get().running(), Ui.ACCENT, () -> {
+                    DeepScanner ds = DeepScanner.get();
+                    if (ds.running()) {
+                        ds.stop();
+                    } else {
+                        cfg.save();
+                        deepError = ds.start(minecraft, cfg.deepScanRadius, cfg.deepScanGenerate);
+                    }
+                });
     }
 
     private int addButton(int right, String label, java.util.function.BooleanSupplier active, Runnable action) {
@@ -179,6 +209,7 @@ public class MapScreen extends ScaledScreen {
         Ui.rect(g, px + 1, py + 30, px + pw - 1, py + 31, Ui.DIVIDER);
 
         renderSidebar(g, mx, my);
+        renderDeepCard(g, mx, my);
         renderMap(g, mx, my, player);
     }
 
@@ -216,6 +247,53 @@ public class MapScreen extends ScaledScreen {
             Ui.text(g, font, Ui.trim(font, e.name(), SIDE_W - 34 - cw - 6), x + 24, ry + 4, visible ? Ui.TEXT : Ui.TEXT_FAINT);
             Ui.textRight(g, font, cnt, x2 - 10, ry + 4, visible ? Ui.TEXT_DIM : Ui.TEXT_FAINT);
         }
+    }
+
+    private void renderDeepCard(GuiGraphicsExtractor g, int mx, int my) {
+        int x = sideX, x2 = sideX + SIDE_W, y = deepY;
+        Ui.card(g, x, y, x2, y + DEEP_H, 6, Ui.SURFACE, Ui.SURFACE_BORDER);
+        Ui.text(g, font, tr("blockatlas.deep.title"), x + 10, y + 8, Ui.TEXT_FAINT);
+        if (!DeepScanner.available(minecraft)) {
+            int cy = y + 26;
+            for (String line : wrap(tr("blockatlas.deep.sp_only"), SIDE_W - 20)) {
+                Ui.text(g, font, line, x + 10, cy, Ui.TEXT_DIM);
+                cy += 11;
+            }
+            return;
+        }
+        DeepScanner ds = DeepScanner.get();
+        Ui.text(g, font, tr("blockatlas.deep.radius"), x + 10, y + 21, Ui.TEXT_DIM);
+        Ui.textRight(g, font, cfg.deepScanRadius + " m", x2 - 10, y + 21, Ui.TEXT);
+        deepRadius.render(g, mx, my, Ui.ACCENT);
+        genToggle.render(g, font, mx, my);
+        startStop.render(g, font, mx, my);
+
+        int ly = y + 84;
+        String l1, l2 = "";
+        int c1 = Ui.TEXT_DIM;
+        if (deepError != null && !ds.running()) {
+            l1 = tr(deepError);
+            c1 = Ui.WARN;
+        } else if (ds.state() == DeepScanner.State.IDLE) {
+            l1 = tr("blockatlas.deep.idle");
+        } else {
+            int total = Math.max(1, ds.total());
+            int done = Math.min(total, ds.done());
+            float frac = done / (float) total;
+            Ui.roundRect(g, x + 10, ly, x2 - 10, ly + 3, 1, Ui.TRACK);
+            Ui.roundRect(g, x + 10, ly, x + 10 + Math.round((SIDE_W - 20) * frac), ly + 3, 1,
+                    ds.state() == DeepScanner.State.DONE ? Ui.OK : Ui.ACCENT);
+            ly += 6;
+            l1 = switch (ds.state()) {
+                case RUNNING -> tr("blockatlas.deep.progress", Ui.formatCount(done), Ui.formatCount(total), Math.round(frac * 100));
+                case DONE -> tr("blockatlas.deep.done");
+                default -> tr("blockatlas.deep.stopped");
+            };
+            l2 = tr("blockatlas.deep.stats", Ui.formatCount((int) Math.min(Integer.MAX_VALUE, ds.found())),
+                    Ui.formatCount(ds.generated()), Ui.formatCount(ds.generatesMissing() ? 0 : ds.missing()));
+        }
+        Ui.text(g, font, Ui.trim(font, l1, SIDE_W - 20), x + 10, ly, c1);
+        if (!l2.isEmpty()) Ui.text(g, font, Ui.trim(font, l2, SIDE_W - 20), x + 10, ly + 11, Ui.TEXT_FAINT);
     }
 
     private List<String> wrap(String text, int width) {
@@ -266,6 +344,20 @@ public class MapScreen extends ScaledScreen {
             int ly1 = (int) screenY(player.getZ() - r), ly2 = (int) screenY(player.getZ() + r);
             Ui.rect(g, lx1, ly1, lx2, ly2, 0x0E7C9CFF);
             g.outline(lx1, ly1, lx2 - lx1, ly2 - ly1, 0x337C9CFF);
+        }
+
+        // deep scan area
+        DeepScanner ds = DeepScanner.get();
+        if (ds.state() != DeepScanner.State.IDLE) {
+            double r = ds.radius();
+            int segs = 180;
+            int col = ds.running() ? 0x887C9CFF : 0x555BD69A;
+            for (int i = 0; i < segs; i++) {
+                double a = i * Math.PI * 2 / segs;
+                int sx = (int) screenX(ds.originX() + Math.cos(a) * r);
+                int sy = (int) screenY(ds.originZ() + Math.sin(a) * r);
+                Ui.rect(g, sx, sy, sx + 2, sy + 2, col);
+            }
         }
 
         // markers
@@ -382,6 +474,13 @@ public class MapScreen extends ScaledScreen {
         int button = ev.button();
         if (button == InputConstants.MOUSE_BUTTON_LEFT) {
             for (PillButton b : buttons) if (b.mouseClicked(mx, my)) return true;
+            if (DeepScanner.available(minecraft)) {
+                if (deepRadius.mouseClicked(mx, my)) {
+                    draggingRadius = true;
+                    return true;
+                }
+                if (genToggle.mouseClicked(mx, my) || startStop.mouseClicked(mx, my)) return true;
+            }
         }
         // sidebar: toggle visibility
         if (mx >= sideX && mx < sideX + SIDE_W && my >= listY && my < listBottom) {
@@ -413,6 +512,10 @@ public class MapScreen extends ScaledScreen {
 
     @Override
     public boolean mouseDragged(MouseButtonEvent raw, double dragX, double dragY) {
+        if (draggingRadius) {
+            deepRadius.drag(scaled(raw).x());
+            return true;
+        }
         if (panning) {
             MouseButtonEvent ev = scaled(raw);
             double dx = ev.x() - panStartMX, dy = ev.y() - panStartMY;
@@ -429,6 +532,12 @@ public class MapScreen extends ScaledScreen {
 
     @Override
     public boolean mouseReleased(MouseButtonEvent raw) {
+        if (draggingRadius) {
+            draggingRadius = false;
+            deepRadius.release();
+            cfg.save();
+            return true;
+        }
         if (panning) {
             panning = false;
             if (!panMoved && hovering) {

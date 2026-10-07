@@ -58,7 +58,11 @@ public final class BlockAtlasConfig {
     /** Remember every found block per world so the map (M) can show it from any distance. */
     public boolean rememberBlocks = true;
     /** Stored positions per block type per dimension. */
-    public int memoryMaxPerBlock = 100000;
+    public int memoryMaxPerBlock = 1000000;
+    /** Deep scan radius in blocks (singleplayer), 500..5000. */
+    public int deepScanRadius = 2000;
+    /** Deep scan also generates chunks that don't exist yet. */
+    public boolean deepScanGenerate = false;
 
     /** Freecam flying speed in blocks per tick (sprint triples it). */
     public double freecamSpeed = 0.6;
@@ -139,7 +143,9 @@ public final class BlockAtlasConfig {
         uiScale = Math.max(0.6f, Math.min(1.6f, uiScale));
         hudScale = Math.max(0.6f, Math.min(1.8f, hudScale));
         hudCorner = Math.floorMod(hudCorner, 4);
-        memoryMaxPerBlock = clamp(memoryMaxPerBlock, 1000, 1000000);
+        if (memoryMaxPerBlock == 100000) memoryMaxPerBlock = 1000000; // old default
+        memoryMaxPerBlock = clamp(memoryMaxPerBlock, 1000, 5000000);
+        deepScanRadius = clamp(deepScanRadius, 500, 5000);
         scanBudgetMicros = clamp(scanBudgetMicros, 500, 20000);
         rescanIntervalTicks = clamp(rescanIntervalTicks, 5, 400);
         maxRenderedBoxes = clamp(maxRenderedBoxes, 100, 20000);

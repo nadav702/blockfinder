@@ -8,6 +8,7 @@ import com.yourname.blockatlas.gui.HudOverlay;
 import com.yourname.blockatlas.gui.MapScreen;
 import com.yourname.blockatlas.highlight.Target;
 import com.yourname.blockatlas.scan.BlockMemory;
+import com.yourname.blockatlas.scan.DeepScanner;
 import com.yourname.blockatlas.highlight.BoxRenderer;
 import com.yourname.blockatlas.highlight.HighlightManager;
 import com.yourname.blockatlas.scan.BlockScanner;
@@ -63,6 +64,7 @@ public final class BlockAtlasClient implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(BlockAtlasClient::onEndTick);
         ClientLifecycleEvents.CLIENT_STOPPING.register(client -> {
             BlockAtlasConfig.get().save();
+            DeepScanner.get().stop();
             BlockMemory.get().unload();
             BoxRenderer.close();
         });
@@ -96,6 +98,7 @@ public final class BlockAtlasClient implements ClientModInitializer {
         }
 
         BlockMemory.get().tick(client);
+        DeepScanner.get().tick(client);
 
         if (client.level == null || client.player == null) {
             Target.clear();

@@ -187,6 +187,22 @@ public final class BlockMemory {
         }
     }
 
+    /** Adds positions without pruning (used by the deep scan of far, unloaded chunks). */
+    public void addAll(Block block, long[] positions) {
+        if (worldKey == null || positions.length == 0) return;
+        int cap = BlockAtlasConfig.get().memoryMaxPerBlock;
+        LongOpenHashSet set = data.computeIfAbsent(block, k -> new LongOpenHashSet(Math.max(16, positions.length)));
+        boolean changed = false;
+        for (long p : positions) {
+            if (set.size() >= cap) break;
+            if (set.add(p)) changed = true;
+        }
+        if (changed) {
+            dirty = true;
+            version++;
+        }
+    }
+
     public static long chunkKey(int cx, int cz) {
         return ((long) cx & 0xFFFFFFFFL) | ((long) cz << 32);
     }
