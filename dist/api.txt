@@ -1,268 +1,518 @@
-=================== com.mojang.renderpearl.api.pipeline.RenderPipeline
-Compiled from "RenderPipeline.java"
-public class com.mojang.renderpearl.api.pipeline.RenderPipeline implements net.fabricmc.fabric.api.client.rendering.v1.FabricRenderPipeline {
-  public int getSortKey();
-  public static void updateSortKeySeed();
-  public java.lang.String toString();
-  public com.mojang.renderpearl.api.pipeline.PolygonMode getPolygonMode();
-  public boolean isCull();
-  public java.util.List<com.mojang.renderpearl.api.pipeline.ColorTargetState> getColorTargetStates();
-  public com.mojang.renderpearl.api.pipeline.DepthStencilState getDepthStencilState();
-  public net.minecraft.resources.Identifier getLocation();
-  public java.util.List<com.mojang.renderpearl.api.vertex.VertexFormat> getVertexFormatBindings();
-  public com.mojang.renderpearl.api.vertex.VertexFormat getVertexFormatBinding(int);
-  public com.mojang.renderpearl.api.pipeline.PrimitiveTopology getPrimitiveTopology();
-  public java.util.Map<com.mojang.renderpearl.api.pipeline.ShaderType, net.minecraft.resources.Identifier> getShaders();
-  public net.minecraft.client.renderer.ShaderDefines getShaderDefines();
-  public java.util.List<com.mojang.renderpearl.api.pipeline.BindGroupLayout> getBindGroupLayouts();
-  public boolean wantsDepthTexture();
-  public int pushConstantSize();
-  public static com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder builder(com.mojang.renderpearl.api.pipeline.RenderPipeline$Snippet...);
+=================== net.minecraft.world.entity.Marker
+Compiled from "Marker.java"
+public class net.minecraft.world.entity.Marker extends net.minecraft.world.entity.Entity {
+  public net.minecraft.world.entity.Marker(net.minecraft.world.entity.EntityType<?>, net.minecraft.world.level.Level);
+  public void tick();
+  public net.minecraft.network.protocol.Packet<net.minecraft.network.protocol.game.ClientGamePacketListener> getAddEntityPacket(net.minecraft.server.level.ServerEntity);
+  public net.minecraft.world.level.material.PushReaction getPistonPushReaction();
+  public boolean isIgnoringBlockTriggers();
+  public final boolean hurtServer(net.minecraft.server.level.ServerLevel, net.minecraft.world.damagesource.DamageSource, float);
 }
-=================== com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder
-Compiled from "RenderPipeline.java"
-public class com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder implements net.fabricmc.fabric.api.client.rendering.v1.FabricRenderPipeline$Builder {
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withLocation(java.lang.String);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withLocation(net.minecraft.resources.Identifier);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withFragmentShader(java.lang.String);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withFragmentShader(net.minecraft.resources.Identifier);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withVertexShader(java.lang.String);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withVertexShader(net.minecraft.resources.Identifier);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withShaderDefine(java.lang.String);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withShaderDefine(java.lang.String, int);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withShaderDefine(java.lang.String, float);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withBindGroupLayout(com.mojang.renderpearl.api.pipeline.BindGroupLayout);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withPolygonMode(com.mojang.renderpearl.api.pipeline.PolygonMode);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withCull(boolean);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withColorTargetState(int, com.mojang.renderpearl.api.pipeline.ColorTargetState);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withColorTargetStates(int, int, java.util.function.Supplier<com.mojang.renderpearl.api.pipeline.ColorTargetState>);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withUnusedColorTargetState(int);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withColorTargetState(com.mojang.renderpearl.api.pipeline.ColorTargetState);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withDepthStencilState(com.mojang.renderpearl.api.pipeline.DepthStencilState);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withDepthStencilState(java.util.Optional<com.mojang.renderpearl.api.pipeline.DepthStencilState>);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withVertexBinding(int, com.mojang.renderpearl.api.vertex.VertexFormat);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withPrimitiveTopology(com.mojang.renderpearl.api.pipeline.PrimitiveTopology);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withPushConstantSize(int);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Builder withSnippet(com.mojang.renderpearl.api.pipeline.RenderPipeline$Snippet);
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Snippet buildSnippet();
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline build();
+=================== net.minecraft.client.player.ClientInput
+Compiled from "ClientInput.java"
+public class net.minecraft.client.player.ClientInput {
+  public net.minecraft.world.entity.player.Input keyPresses;
+  public net.minecraft.client.player.ClientInput();
+  public void tick();
+  public net.minecraft.world.phys.Vec2 getMoveVector();
+  public boolean hasForwardImpulse();
+  public void makeJump();
 }
-=================== com.mojang.renderpearl.api.pipeline.RenderPipeline$Snippet
-Compiled from "RenderPipeline.java"
-public final class com.mojang.renderpearl.api.pipeline.RenderPipeline$Snippet extends java.lang.Record implements net.fabricmc.fabric.api.client.rendering.v1.FabricRenderPipeline$Snippet {
-  public com.mojang.renderpearl.api.pipeline.RenderPipeline$Snippet(java.util.Map<com.mojang.renderpearl.api.pipeline.ShaderType, net.minecraft.resources.Identifier>, java.util.Optional<net.minecraft.client.renderer.ShaderDefines>, java.util.Optional<java.util.List<com.mojang.renderpearl.api.pipeline.BindGroupLayout>>, com.mojang.renderpearl.api.pipeline.ColorTargetState[], int, java.util.Optional<com.mojang.renderpearl.api.pipeline.DepthStencilState>, java.util.Optional<com.mojang.renderpearl.api.pipeline.PolygonMode>, java.util.Optional<java.lang.Boolean>, com.mojang.renderpearl.api.vertex.VertexFormat[], java.util.Optional<com.mojang.renderpearl.api.pipeline.PrimitiveTopology>, int);
+=================== net.minecraft.client.player.KeyboardInput
+Compiled from "KeyboardInput.java"
+public class net.minecraft.client.player.KeyboardInput extends net.minecraft.client.player.ClientInput {
+  public net.minecraft.client.player.KeyboardInput(net.minecraft.client.Options);
+  public void tick();
+}
+=================== net.minecraft.world.entity.player.Input
+Compiled from "Input.java"
+public final class net.minecraft.world.entity.player.Input extends java.lang.Record {
+  public static final net.minecraft.network.codec.StreamCodec<net.minecraft.network.FriendlyByteBuf, net.minecraft.world.entity.player.Input> STREAM_CODEC;
+  public static final net.minecraft.world.entity.player.Input EMPTY;
+  public net.minecraft.world.entity.player.Input(boolean, boolean, boolean, boolean, boolean, boolean, boolean);
   public final java.lang.String toString();
   public final int hashCode();
   public final boolean equals(java.lang.Object);
-  public java.util.Map<com.mojang.renderpearl.api.pipeline.ShaderType, net.minecraft.resources.Identifier> shaders();
-  public java.util.Optional<net.minecraft.client.renderer.ShaderDefines> shaderDefines();
-  public java.util.Optional<java.util.List<com.mojang.renderpearl.api.pipeline.BindGroupLayout>> bindGroupLayouts();
-  public com.mojang.renderpearl.api.pipeline.ColorTargetState[] colorTargetStates();
-  public int activeColorTargetStateCount();
-  public java.util.Optional<com.mojang.renderpearl.api.pipeline.DepthStencilState> depthStencilState();
-  public java.util.Optional<com.mojang.renderpearl.api.pipeline.PolygonMode> polygonMode();
-  public java.util.Optional<java.lang.Boolean> cull();
-  public com.mojang.renderpearl.api.vertex.VertexFormat[] vertexFormatPerBuffer();
-  public java.util.Optional<com.mojang.renderpearl.api.pipeline.PrimitiveTopology> vertexFormatMode();
-  public int pushConstantSize();
+  public boolean forward();
+  public boolean backward();
+  public boolean left();
+  public boolean right();
+  public boolean jump();
+  public boolean shift();
+  public boolean sprint();
 }
-=================== com.mojang.renderpearl.api.pipeline.PrimitiveTopology
-Compiled from "PrimitiveTopology.java"
-public final class com.mojang.renderpearl.api.pipeline.PrimitiveTopology extends java.lang.Enum<com.mojang.renderpearl.api.pipeline.PrimitiveTopology> {
-  public static final com.mojang.renderpearl.api.pipeline.PrimitiveTopology LINES;
-  public static final com.mojang.renderpearl.api.pipeline.PrimitiveTopology DEBUG_LINES;
-  public static final com.mojang.renderpearl.api.pipeline.PrimitiveTopology DEBUG_LINE_STRIP;
-  public static final com.mojang.renderpearl.api.pipeline.PrimitiveTopology POINTS;
-  public static final com.mojang.renderpearl.api.pipeline.PrimitiveTopology TRIANGLES;
-  public static final com.mojang.renderpearl.api.pipeline.PrimitiveTopology TRIANGLE_STRIP;
-  public static final com.mojang.renderpearl.api.pipeline.PrimitiveTopology TRIANGLE_FAN;
-  public static final com.mojang.renderpearl.api.pipeline.PrimitiveTopology QUADS;
-  public final int primitiveLength;
-  public final int primitiveStride;
-  public final boolean connectedPrimitives;
-  public static com.mojang.renderpearl.api.pipeline.PrimitiveTopology[] values();
-  public static com.mojang.renderpearl.api.pipeline.PrimitiveTopology valueOf(java.lang.String);
-  public int indexCount(int);
+=================== net.minecraft.client.Options
+Compiled from "Options.java"
+public class net.minecraft.client.Options {
+  public static final int RENDER_DISTANCE_SHORT;
+  public static final int RENDER_DISTANCE_FAR;
+  public static final int RENDER_DISTANCE_REALLY_FAR;
+  public static final int RENDER_DISTANCE_EXTREME;
+  public static final int UNLIMITED_FRAMERATE_CUTOFF;
+  public java.util.List<java.lang.String> resourcePacks;
+  public java.util.List<java.lang.String> incompatibleResourcePacks;
+  public java.lang.String fullscreenVideoModeString;
+  public boolean hideServerAddress;
+  public boolean advancedItemTooltips;
+  public boolean pauseOnLostFocus;
+  public int overrideWidth;
+  public int overrideHeight;
+  public net.minecraft.client.tutorial.TutorialSteps tutorialStep;
+  public boolean joinedFirstServer;
+  public int glDebugVerbosity;
+  public boolean skipMultiplayerWarning;
+  public final net.minecraft.client.KeyMapping keyUp;
+  public final net.minecraft.client.KeyMapping keyLeft;
+  public final net.minecraft.client.KeyMapping keyDown;
+  public final net.minecraft.client.KeyMapping keyRight;
+  public final net.minecraft.client.KeyMapping keyJump;
+  public final net.minecraft.client.KeyMapping keyShift;
+  public final net.minecraft.client.KeyMapping keySprint;
+  public final net.minecraft.client.KeyMapping keyInventory;
+  public final net.minecraft.client.KeyMapping keySwapOffhand;
+  public final net.minecraft.client.KeyMapping keyDrop;
+  public final net.minecraft.client.KeyMapping keyUse;
+  public final net.minecraft.client.KeyMapping keyAttack;
+  public final net.minecraft.client.KeyMapping keyPickItem;
+  public final net.minecraft.client.KeyMapping keyChat;
+  public final net.minecraft.client.KeyMapping keyPlayerList;
+  public final net.minecraft.client.KeyMapping keyCommand;
+  public final net.minecraft.client.KeyMapping keyFriends;
+  public final net.minecraft.client.KeyMapping keySocialInteractions;
+  public final net.minecraft.client.KeyMapping keyScreenshot;
+  public final net.minecraft.client.KeyMapping keyTogglePerspective;
+  public final net.minecraft.client.KeyMapping keySmoothCamera;
+  public final net.minecraft.client.KeyMapping keyFullscreen;
+  public final net.minecraft.client.KeyMapping keyAdvancements;
+  public final net.minecraft.client.KeyMapping keyQuickActions;
+  public final net.minecraft.client.KeyMapping keyToggleGui;
+  public final net.minecraft.client.KeyMapping keyToggleSpectatorShaderEffects;
+  public final net.minecraft.client.KeyMapping[] keyHotbarSlots;
+  public final net.minecraft.client.KeyMapping keySaveHotbarActivator;
+  public final net.minecraft.client.KeyMapping keyLoadHotbarActivator;
+  public final net.minecraft.client.KeyMapping keySpectatorOutlines;
+  public final net.minecraft.client.KeyMapping keySpectatorHotbar;
+  public final net.minecraft.client.KeyMapping keyDebugOverlay;
+  public final net.minecraft.client.KeyMapping keyDebugModifier;
+  public final net.minecraft.client.KeyMapping keyDebugCrash;
+  public final net.minecraft.client.KeyMapping keyDebugReloadChunk;
+  public final net.minecraft.client.KeyMapping keyDebugShowHitboxes;
+  public final net.minecraft.client.KeyMapping keyDebugClearChat;
+  public final net.minecraft.client.KeyMapping keyDebugShowChunkBorders;
+  public final net.minecraft.client.KeyMapping keyDebugShowAdvancedTooltips;
+  public final net.minecraft.client.KeyMapping keyDebugCopyRecreateCommand;
+  public final net.minecraft.client.KeyMapping keyDebugSpectate;
+  public final net.minecraft.client.KeyMapping keyDebugSwitchGameMode;
+  public final net.minecraft.client.KeyMapping keyDebugDebugOptions;
+  public final net.minecraft.client.KeyMapping keyDebugFocusPause;
+  public final net.minecraft.client.KeyMapping keyDebugDumpDynamicTextures;
+  public final net.minecraft.client.KeyMapping keyDebugReloadResourcePacks;
+  public final net.minecraft.client.KeyMapping keyDebugProfiling;
+  public final net.minecraft.client.KeyMapping keyDebugCopyLocation;
+  public final net.minecraft.client.KeyMapping keyDebugDumpVersion;
+  public final net.minecraft.client.KeyMapping keyDebugPofilingChart;
+  public final net.minecraft.client.KeyMapping keyDebugFpsCharts;
+  public final net.minecraft.client.KeyMapping keyDebugNetworkCharts;
+  public final net.minecraft.client.KeyMapping keyDebugLightmapTexture;
+  public final net.minecraft.client.KeyMapping keyDebugSwitchTranslucencyMode;
+  public final net.minecraft.client.KeyMapping[] debugKeys;
+  public final net.minecraft.client.KeyMapping[] keyMappings;
+  public java.lang.String lastMpIp;
+  public boolean smoothCamera;
+  public static final int AUTO_GUI_SCALE;
+  public static final int DEBUG_GUI_SCALE_UNCHANGED;
+  public java.lang.String languageCode;
+  public boolean onboardAccessibility;
+  public boolean syncWrites;
+  public boolean startedCleanly;
+  public static boolean isSoundDeviceDefault(java.lang.String);
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> darkMojangStudiosBackground();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> hideLightningFlash();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> hideSplashTexts();
+  public net.minecraft.client.OptionInstance<java.lang.Double> sensitivity();
+  public net.minecraft.client.OptionInstance<java.lang.Integer> renderDistance();
+  public net.minecraft.client.OptionInstance<java.lang.Integer> simulationDistance();
+  public net.minecraft.client.OptionInstance<java.lang.Double> entityDistanceScaling();
+  public net.minecraft.client.OptionInstance<java.lang.Integer> framerateLimit();
+  public net.minecraft.client.OptionInstance<net.minecraft.client.PreferredGraphicsApi> preferredGraphicsBackend();
+  public boolean isRestartRequiredToApplyVideoSettings();
+  public void applyGraphicsPreset(net.minecraft.client.GraphicsPreset);
+  public net.minecraft.client.OptionInstance<net.minecraft.client.GraphicsPreset> graphicsPreset();
+  public net.minecraft.client.OptionInstance<net.minecraft.client.InactivityFpsLimit> inactivityFpsLimit();
+  public net.minecraft.client.OptionInstance<net.minecraft.client.CloudStatus> cloudStatus();
+  public net.minecraft.client.OptionInstance<java.lang.Integer> cloudRange();
+  public net.minecraft.client.OptionInstance<java.lang.Integer> weatherRadius();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> cutoutLeaves();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> vignette();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> improvedTransparency();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> ambientOcclusion();
+  public net.minecraft.client.OptionInstance<java.lang.Double> chunkSectionFadeInTime();
+  public net.minecraft.client.OptionInstance<net.minecraft.client.PrioritizeChunkUpdates> prioritizeChunkUpdates();
+  public void updateResourcePacks(net.minecraft.server.packs.repository.PackRepository);
+  public net.minecraft.client.OptionInstance<net.minecraft.world.entity.player.ChatVisiblity> chatVisibility();
+  public net.minecraft.client.OptionInstance<java.lang.Double> chatOpacity();
+  public net.minecraft.client.OptionInstance<java.lang.Double> chatLineSpacing();
+  public net.minecraft.client.OptionInstance<java.lang.Integer> menuBackgroundBlurriness();
+  public int getMenuBackgroundBlurriness();
+  public net.minecraft.client.OptionInstance<java.lang.Double> textBackgroundOpacity();
+  public net.minecraft.client.OptionInstance<java.lang.Double> panoramaSpeed();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> highContrast();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> highContrastBlockOutline();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> narratorHotkey();
+  public net.minecraft.client.OptionInstance<net.minecraft.world.entity.HumanoidArm> mainHand();
+  public net.minecraft.client.OptionInstance<java.lang.Double> chatScale();
+  public net.minecraft.client.OptionInstance<java.lang.Double> chatWidth();
+  public net.minecraft.client.OptionInstance<java.lang.Double> chatHeightUnfocused();
+  public net.minecraft.client.OptionInstance<java.lang.Double> chatHeightFocused();
+  public net.minecraft.client.OptionInstance<java.lang.Double> chatDelay();
+  public net.minecraft.client.OptionInstance<java.lang.Double> notificationDisplayTime();
+  public net.minecraft.client.OptionInstance<java.lang.Integer> mipmapLevels();
+  public net.minecraft.client.OptionInstance<java.lang.Integer> maxAnisotropyBit();
+  public int maxAnisotropyValue();
+  public net.minecraft.client.OptionInstance<net.minecraft.client.TextureFilteringMethod> textureFiltering();
+  public net.minecraft.client.OptionInstance<net.minecraft.client.AttackIndicatorStatus> attackIndicator();
+  public net.minecraft.client.OptionInstance<java.lang.Integer> biomeBlendRadius();
+  public net.minecraft.client.OptionInstance<java.lang.Double> mouseWheelSensitivity();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> allowCursorChanges();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> quitShortcuts();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> ctrlClickEmulatesRightClick();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> autoJump();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> rotateWithMinecart();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> operatorItemsTab();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> autoSuggestions();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> chatColors();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> chatLinks();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> chatLinksPrompt();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> enableVsync();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> entityShadows();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> forceUnicodeFont();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> japaneseGlyphVariants();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> invertMouseX();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> invertMouseY();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> discreteMouseScroll();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> realmsNotifications();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> allowServerListing();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> reducedDebugInfo();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> inGameNotification();
+  public net.minecraft.client.OptionInstance<net.minecraft.client.PresenceSharing> sharePresence();
+  public final float getFinalSoundSourceVolume(net.minecraft.sounds.SoundSource);
+  public final float getSoundSourceVolume(net.minecraft.sounds.SoundSource);
+  public final net.minecraft.client.OptionInstance<java.lang.Double> getSoundSourceOptionInstance(net.minecraft.sounds.SoundSource);
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> showSubtitles();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> directionalAudio();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> backgroundForChatOnly();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> fullscreen();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> exclusiveFullscreen();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> macFullscreenMenuVisibility();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> bobView();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> toggleCrouch();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> toggleSprint();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> toggleAttack();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> toggleUse();
+  public net.minecraft.client.OptionInstance<java.lang.Integer> sprintWindow();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> hideMatchedNames();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> showAutosaveIndicator();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> onlyShowSecureChat();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> saveChatDrafts();
+  public net.minecraft.client.OptionInstance<java.lang.Integer> fov();
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> telemetryOptInExtra();
+  public net.minecraft.client.OptionInstance<java.lang.Double> screenEffectScale();
+  public net.minecraft.client.OptionInstance<java.lang.Double> fovEffectScale();
+  public net.minecraft.client.OptionInstance<java.lang.Double> darknessEffectScale();
+  public net.minecraft.client.OptionInstance<java.lang.Double> glintSpeed();
+  public net.minecraft.client.OptionInstance<java.lang.Double> glintStrength();
+  public net.minecraft.client.OptionInstance<java.lang.Double> damageTiltStrength();
+  public net.minecraft.client.OptionInstance<java.lang.Double> gamma();
+  public net.minecraft.client.OptionInstance<java.lang.Integer> guiScale();
+  public net.minecraft.client.OptionInstance<java.lang.Integer> debugGuiScale();
+  public net.minecraft.client.OptionInstance<net.minecraft.server.level.ParticleStatus> particles();
+  public net.minecraft.client.OptionInstance<net.minecraft.client.NarratorStatus> narrator();
+  public net.minecraft.client.OptionInstance<java.lang.String> soundDevice();
+  public void onboardingAccessibilityFinished();
+  public net.minecraft.client.OptionInstance<net.minecraft.client.sounds.MusicManager$MusicFrequency> musicFrequency();
+  public net.minecraft.client.OptionInstance<net.minecraft.client.MusicToastDisplayState> musicToast();
+  public net.minecraft.client.Options(net.minecraft.client.Minecraft, java.io.File);
+  public float getBackgroundOpacity(float);
+  public int getBackgroundColor(float);
+  public int getBackgroundColor(int);
+  public void load();
+  public void save();
+  public net.minecraft.server.level.ClientInformation buildPlayerInformation();
+  public void broadcastOptions();
+  public void setModelPart(net.minecraft.world.entity.player.PlayerModelPart, boolean);
+  public boolean isModelPartEnabled(net.minecraft.world.entity.player.PlayerModelPart);
+  public net.minecraft.client.CloudStatus getCloudStatus();
+  public boolean useNativeTransport();
+  public void loadSelectedResourcePacks(net.minecraft.server.packs.repository.PackRepository);
+  public net.minecraft.client.CameraType getCameraType();
+  public void setCameraType(net.minecraft.client.CameraType);
+  public java.io.File getFile();
+  public java.lang.String dumpOptionsForReport();
+  public void setServerRenderDistance(int);
+  public int getEffectiveRenderDistance();
+  public static net.minecraft.network.chat.Component genericValueLabel(net.minecraft.network.chat.Component, net.minecraft.network.chat.Component);
+  public static net.minecraft.network.chat.Component genericValueLabel(net.minecraft.network.chat.Component, int);
+  public static net.minecraft.network.chat.Component genericValueOrOffLabel(net.minecraft.network.chat.Component, int);
 }
-=================== com.mojang.renderpearl.api.commands.RenderPass
-Compiled from "RenderPass.java"
-public interface com.mojang.renderpearl.api.commands.RenderPass extends com.mojang.renderpearl.util.UncheckedAutoCloseable {
-  public static final int MAX_VERTEX_BUFFERS;
-  public static final int INDIRECT_DRAW_SIZE;
-  public static final int INDIRECT_INDEXED_DRAW_SIZE;
-  public abstract void pushDebugGroup(java.util.function.Supplier<java.lang.String>);
-  public abstract void popDebugGroup();
-  public abstract void writeTimestamp(com.mojang.renderpearl.api.commands.GpuQueryPool, int);
-  public abstract void setPipeline(com.mojang.renderpearl.api.pipeline.CompiledRenderPipeline);
-  public abstract void setUniform(java.lang.String, com.mojang.renderpearl.api.textures.GpuTextureView, com.mojang.renderpearl.api.textures.GpuSampler);
-  public abstract void setUniform(java.lang.String, com.mojang.renderpearl.api.buffers.GpuBuffer);
-  public abstract void setUniform(java.lang.String, com.mojang.renderpearl.api.buffers.GpuBufferSlice);
-  public abstract void pushConstants(java.nio.ByteBuffer);
-  public abstract void enableScissor(int, int, int, int);
-  public abstract void disableScissor();
-  public abstract void setVertexBuffer(int, com.mojang.renderpearl.api.buffers.GpuBufferSlice);
-  public abstract void setIndexBuffer(com.mojang.renderpearl.api.buffers.GpuBuffer, com.mojang.renderpearl.api.pipeline.IndexType);
-  public abstract void drawIndexed(int, int, int, int, int);
-  public abstract void multiDrawIndexed(java.nio.IntBuffer, int, int, int);
-  public abstract void multiDrawIndexed(org.lwjgl.PointerBuffer, java.nio.IntBuffer, java.nio.IntBuffer, int);
-  public abstract void drawIndexedIndirect(com.mojang.renderpearl.api.buffers.GpuBufferSlice, int);
-  public abstract <T> void drawMultipleIndexed(java.util.Collection<com.mojang.renderpearl.api.commands.RenderPass$Draw<T>>, com.mojang.renderpearl.api.buffers.GpuBuffer, com.mojang.renderpearl.api.pipeline.IndexType, java.util.Collection<java.lang.String>, T);
-  public abstract void draw(int, int, int, int);
-  public abstract void multiDraw(java.nio.IntBuffer, int, int, int);
-  public abstract void multiDraw(java.nio.IntBuffer, java.nio.IntBuffer, int);
-  public abstract void drawIndirect(com.mojang.renderpearl.api.buffers.GpuBufferSlice, int);
+=================== net.fabricmc.fabric.api.event.player.AttackBlockCallback
+Compiled from "AttackBlockCallback.java"
+public interface net.fabricmc.fabric.api.event.player.AttackBlockCallback {
+  public static final net.fabricmc.fabric.api.event.Event<net.fabricmc.fabric.api.event.player.AttackBlockCallback> EVENT;
+  public abstract net.minecraft.world.InteractionResult interact(net.minecraft.world.entity.player.Player, net.minecraft.world.level.Level, net.minecraft.world.InteractionHand, net.minecraft.core.BlockPos, net.minecraft.core.Direction);
 }
-=================== com.mojang.renderpearl.api.commands.CommandEncoder
-Compiled from "CommandEncoder.java"
-public interface com.mojang.renderpearl.api.commands.CommandEncoder {
-  public abstract void submit();
-  public abstract com.mojang.renderpearl.api.buffers.TransientMemory transientMemory();
-  public default com.mojang.renderpearl.api.commands.RenderPass createRenderPass(java.util.function.Supplier<java.lang.String>, com.mojang.renderpearl.api.textures.GpuTextureView, java.util.Optional<org.joml.Vector4fc>);
-  public default com.mojang.renderpearl.api.commands.RenderPass createRenderPass(java.util.function.Supplier<java.lang.String>, com.mojang.renderpearl.api.textures.GpuTextureView, java.util.Optional<org.joml.Vector4fc>, com.mojang.renderpearl.api.textures.GpuTextureView, java.util.OptionalDouble);
-  public default com.mojang.renderpearl.api.commands.RenderPass createRenderPass(java.util.function.Supplier<java.lang.String>, com.mojang.renderpearl.api.textures.GpuTextureView, java.util.Optional<org.joml.Vector4fc>, com.mojang.renderpearl.api.textures.GpuTextureView, java.util.OptionalDouble, com.mojang.renderpearl.api.commands.RenderPass$RenderArea);
-  public abstract com.mojang.renderpearl.api.commands.RenderPass createRenderPass(com.mojang.renderpearl.api.commands.RenderPassDescriptor);
-  public abstract void clearColorTexture(com.mojang.renderpearl.api.textures.GpuTexture, org.joml.Vector4fc);
-  public abstract void clearColorAndDepthTextures(com.mojang.renderpearl.api.textures.GpuTexture, org.joml.Vector4fc, com.mojang.renderpearl.api.textures.GpuTexture, double);
-  public abstract void clearColorAndDepthTextures(com.mojang.renderpearl.api.textures.GpuTexture, org.joml.Vector4fc, com.mojang.renderpearl.api.textures.GpuTexture, double, int, int, int, int, int);
-  public abstract void clearDepthTexture(com.mojang.renderpearl.api.textures.GpuTexture, double);
-  public abstract void writeToBuffer(com.mojang.renderpearl.api.buffers.GpuBufferSlice, java.nio.ByteBuffer);
-  public abstract void copyToBuffer(com.mojang.renderpearl.api.buffers.GpuBufferSlice, com.mojang.renderpearl.api.buffers.GpuBufferSlice);
-  public abstract void writeToTexture(com.mojang.renderpearl.api.textures.GpuTexture, com.mojang.blaze3d.platform.NativeImage);
-  public abstract void writeToTexture(com.mojang.renderpearl.api.textures.GpuTexture, com.mojang.blaze3d.platform.NativeImage, int, int, int, int);
-  public abstract void writeToTexture(com.mojang.renderpearl.api.textures.GpuTexture, java.nio.ByteBuffer, int, int, int, int, int, int);
-  public abstract void copyBufferToTexture(com.mojang.renderpearl.api.buffers.GpuBufferSlice, int, int, int, int, com.mojang.renderpearl.api.textures.GpuTexture, int, int, int, int, int, int);
-  public abstract void copyTextureToBuffer(com.mojang.renderpearl.api.textures.GpuTexture, com.mojang.renderpearl.api.buffers.GpuBuffer, long, java.lang.Runnable, int);
-  public abstract void copyTextureToBuffer(com.mojang.renderpearl.api.textures.GpuTexture, com.mojang.renderpearl.api.buffers.GpuBuffer, long, java.lang.Runnable, int, int, int, int, int);
-  public abstract void copyTextureToTexture(com.mojang.renderpearl.api.textures.GpuTexture, com.mojang.renderpearl.api.textures.GpuTexture, int, int, int, int, int, int, int);
-  public abstract com.mojang.renderpearl.api.commands.GpuFence createFence();
-  public abstract void writeTimestamp(com.mojang.renderpearl.api.commands.GpuQueryPool, int);
+=================== net.fabricmc.fabric.api.event.player.UseBlockCallback
+Compiled from "UseBlockCallback.java"
+public interface net.fabricmc.fabric.api.event.player.UseBlockCallback {
+  public static final net.fabricmc.fabric.api.event.Event<net.fabricmc.fabric.api.event.player.UseBlockCallback> EVENT;
+  public abstract net.minecraft.world.InteractionResult interact(net.minecraft.world.entity.player.Player, net.minecraft.world.level.Level, net.minecraft.world.InteractionHand, net.minecraft.world.phys.BlockHitResult);
 }
-=================== com.mojang.renderpearl.api.device.GpuDevice
-Compiled from "GpuDevice.java"
-public interface com.mojang.renderpearl.api.device.GpuDevice {
-  public abstract com.mojang.renderpearl.api.device.GpuSurface createSurface(long, java.util.function.BooleanSupplier);
-  public abstract com.mojang.renderpearl.api.commands.CommandEncoder createCommandEncoder();
-  public abstract com.mojang.renderpearl.api.textures.GpuSampler createSampler(com.mojang.renderpearl.api.textures.AddressMode, com.mojang.renderpearl.api.textures.AddressMode, com.mojang.renderpearl.api.textures.FilterMode, com.mojang.renderpearl.api.textures.FilterMode, int, java.util.OptionalDouble);
-  public abstract com.mojang.renderpearl.api.textures.GpuTexture createTexture(java.util.function.Supplier<java.lang.String>, int, com.mojang.renderpearl.api.GpuFormat, int, int, int, int);
-  public abstract com.mojang.renderpearl.api.textures.GpuTexture createTexture(java.lang.String, int, com.mojang.renderpearl.api.GpuFormat, int, int, int, int);
-  public abstract com.mojang.renderpearl.api.textures.GpuTextureView createTextureView(com.mojang.renderpearl.api.textures.GpuTexture);
-  public abstract com.mojang.renderpearl.api.textures.GpuTextureView createTextureView(com.mojang.renderpearl.api.textures.GpuTexture, int, int);
-  public abstract com.mojang.renderpearl.api.buffers.GpuBuffer createBuffer(java.util.function.Supplier<java.lang.String>, int, long);
-  public abstract com.mojang.renderpearl.api.buffers.GpuBuffer createBuffer(java.util.function.Supplier<java.lang.String>, int, java.nio.ByteBuffer);
-  public abstract java.util.List<java.lang.String> getLastDebugMessages();
-  public abstract boolean isDebuggingEnabled();
-  public abstract java.util.concurrent.CompletableFuture<com.mojang.renderpearl.api.pipeline.CompiledRenderPipeline$Pending> compilePipeline(com.mojang.renderpearl.api.pipeline.RenderPipeline, com.mojang.renderpearl.api.pipeline.ShaderSource, java.util.concurrent.Executor);
-  public abstract void close();
-  public abstract com.mojang.renderpearl.api.commands.GpuQueryPool createTimestampQueryPool(int);
-  public abstract com.mojang.renderpearl.api.device.DeviceInfo getDeviceInfo();
+=================== net.fabricmc.fabric.api.event.player.UseItemCallback
+Compiled from "UseItemCallback.java"
+public interface net.fabricmc.fabric.api.event.player.UseItemCallback {
+  public static final net.fabricmc.fabric.api.event.Event<net.fabricmc.fabric.api.event.player.UseItemCallback> EVENT;
+  public abstract net.minecraft.world.InteractionResult interact(net.minecraft.world.entity.player.Player, net.minecraft.world.level.Level, net.minecraft.world.InteractionHand);
 }
-=================== com.mojang.renderpearl.api.buffers.GpuBuffer
-Compiled from "GpuBuffer.java"
-public interface com.mojang.renderpearl.api.buffers.GpuBuffer extends com.mojang.renderpearl.util.UncheckedAutoCloseable {
-  public static final int USAGE_MAP_READ;
-  public static final int USAGE_MAP_WRITE;
-  public static final int USAGE_HINT_CLIENT_STORAGE;
-  public static final int USAGE_COPY_DST;
-  public static final int USAGE_COPY_SRC;
-  public static final int USAGE_VERTEX;
-  public static final int USAGE_INDEX;
-  public static final int USAGE_UNIFORM;
-  public static final int USAGE_UNIFORM_TEXEL_BUFFER;
-  public static final int USAGE_INDIRECT_PARAMETERS;
-  public abstract long size();
-  public abstract int usage();
-  public abstract boolean isClosed();
-  public default com.mojang.renderpearl.api.buffers.GpuBufferSlice slice(long, long);
-  public default com.mojang.renderpearl.api.buffers.GpuBufferSlice slice();
-  public default com.mojang.renderpearl.api.buffers.GpuBufferSlice$MappedView map(boolean, boolean);
-  public abstract com.mojang.renderpearl.api.buffers.GpuBufferSlice$MappedView map(long, long, boolean, boolean);
+=================== net.fabricmc.fabric.api.event.player.AttackEntityCallback
+Compiled from "AttackEntityCallback.java"
+public interface net.fabricmc.fabric.api.event.player.AttackEntityCallback {
+  public static final net.fabricmc.fabric.api.event.Event<net.fabricmc.fabric.api.event.player.AttackEntityCallback> EVENT;
+  public abstract net.minecraft.world.InteractionResult interact(net.minecraft.world.entity.player.Player, net.minecraft.world.level.Level, net.minecraft.world.InteractionHand, net.minecraft.world.entity.Entity, net.minecraft.world.phys.EntityHitResult);
 }
-=================== net.minecraft.client.renderer.DynamicGpuData
-Compiled from "DynamicGpuData.java"
-public class net.minecraft.client.renderer.DynamicGpuData implements java.lang.AutoCloseable {
-  public static final int TRANSFORM_UBO_SIZE;
-  public static final int TERRAIN_TRANSFORM_UBO_SIZE;
-  public static final int CHUNK_SECTION_UBO_SIZE;
-  public net.minecraft.client.renderer.DynamicGpuData();
-  public void reset();
-  public void close();
-  public com.mojang.renderpearl.api.buffers.GpuBufferSlice writeTransform(org.joml.Matrix4f);
-  public com.mojang.renderpearl.api.buffers.GpuBufferSlice writeTransform(org.joml.Matrix4f, org.joml.Vector4f);
-  public com.mojang.renderpearl.api.buffers.GpuBufferSlice writeTransform(org.joml.Matrix4f, org.joml.Matrix4f);
-  public com.mojang.renderpearl.api.buffers.GpuBufferSlice writeTransform(org.joml.Matrix4f, org.joml.Vector4f, org.joml.Vector3f, org.joml.Matrix4f);
-  public com.mojang.renderpearl.api.buffers.GpuBufferSlice writeTransform(net.minecraft.client.renderer.DynamicGpuData$Transform);
-  public com.mojang.renderpearl.api.buffers.GpuBufferSlice[] writeTransforms(net.minecraft.client.renderer.DynamicGpuData$Transform...);
-  public com.mojang.renderpearl.api.buffers.GpuBufferSlice writeTerrainTransform(org.joml.Matrix4fc, int, int);
-  public com.mojang.renderpearl.api.buffers.GpuBufferSlice[] writeChunkSections(net.minecraft.client.renderer.DynamicGpuData$ChunkSectionInfo...);
-  public com.mojang.renderpearl.api.buffers.GpuBufferSlice writeChunkSectionsInstanced(java.util.List<net.minecraft.client.renderer.DynamicGpuData$ChunkSectionInfo>);
-  public com.mojang.renderpearl.api.buffers.GpuBufferSlice[] writeChunkSectionCommands(java.util.List<java.util.List<net.minecraft.client.renderer.DynamicGpuData$IndexedDraw>>);
+=================== net.fabricmc.fabric.api.event.player.UseEntityCallback
+Compiled from "UseEntityCallback.java"
+public interface net.fabricmc.fabric.api.event.player.UseEntityCallback {
+  public static final net.fabricmc.fabric.api.event.Event<net.fabricmc.fabric.api.event.player.UseEntityCallback> EVENT;
+  public abstract net.minecraft.world.InteractionResult interact(net.minecraft.world.entity.player.Player, net.minecraft.world.level.Level, net.minecraft.world.InteractionHand, net.minecraft.world.entity.Entity, net.minecraft.world.phys.EntityHitResult);
 }
-=================== com.mojang.blaze3d.platform.InputConstants$Key
-Compiled from "InputConstants.java"
-public final class com.mojang.blaze3d.platform.InputConstants$Key {
-  public com.mojang.blaze3d.platform.InputConstants$Type getType();
-  public int getValue();
-  public java.lang.String getName();
-  public net.minecraft.network.chat.Component getDisplayName();
-  public java.util.OptionalInt getNumericKeyValue();
-  public boolean equals(java.lang.Object);
-  public int hashCode();
-  public java.lang.String toString();
+=================== net.minecraft.client.gui.components.AbstractWidget
+Compiled from "AbstractWidget.java"
+public abstract class net.minecraft.client.gui.components.AbstractWidget implements net.minecraft.client.gui.layouts.LayoutElement,net.minecraft.client.gui.components.Renderable,net.minecraft.client.gui.components.events.GuiEventListener,net.minecraft.client.gui.narration.NarratableEntry {
+  public boolean active;
+  public boolean visible;
+  public net.minecraft.client.gui.components.AbstractWidget(int, int, int, int, net.minecraft.network.chat.Component);
+  public int getHeight();
+  public final void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+  public void setTooltip(net.minecraft.client.gui.components.Tooltip);
+  public void setTooltipDelay(java.time.Duration);
+  public static net.minecraft.network.chat.MutableComponent wrapDefaultNarrationMessage(net.minecraft.network.chat.Component);
+  public void onClick(net.minecraft.client.input.MouseButtonEvent, boolean);
+  public void onRelease(net.minecraft.client.input.MouseButtonEvent);
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+  public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent);
+  public boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent, double, double);
+  public net.minecraft.client.gui.ComponentPath nextFocusPath(net.minecraft.client.gui.navigation.FocusNavigationEvent);
+  public boolean isMouseOver(double, double);
+  public void playDownSound(net.minecraft.client.sounds.SoundManager);
+  public static void playButtonClickSound(net.minecraft.client.sounds.SoundManager);
+  public int getWidth();
+  public void setWidth(int);
+  public void setHeight(int);
+  public void setAlpha(float);
+  public float getAlpha();
+  public void setMessage(net.minecraft.network.chat.Component);
+  public net.minecraft.network.chat.Component getMessage();
+  public boolean isFocused();
+  public boolean isHovered();
+  public boolean isHoveredOrFocused();
+  public boolean isActive();
+  public void setFocused(boolean);
+  public net.minecraft.client.gui.narration.NarratableEntry$NarrationPriority narrationPriority();
+  public final void updateNarration(net.minecraft.client.gui.narration.NarrationElementOutput);
+  public int getX();
+  public void setX(int);
+  public int getY();
+  public void setY(int);
+  public int getRight();
+  public int getBottom();
+  public void visitWidgets(java.util.function.Consumer<net.minecraft.client.gui.components.AbstractWidget>);
+  public void setSize(int, int);
+  public net.minecraft.client.gui.navigation.ScreenRectangle getRectangle();
+  public void setRectangle(int, int, int, int);
+  public int getTabOrderGroup();
+  public void setTabOrderGroup(int);
 }
-=================== net.fabricmc.fabric.api.client.rendering.v1.level.LevelTerrainRenderContext
-Compiled from "LevelTerrainRenderContext.java"
-public interface net.fabricmc.fabric.api.client.rendering.v1.level.LevelTerrainRenderContext extends net.fabricmc.fabric.api.client.rendering.v1.level.AbstractLevelRenderContext {
-  public abstract net.minecraft.client.renderer.chunk.ChunkSectionsToRender sectionsToRender();
+=================== net.minecraft.client.gui.components.EditBox
+Compiled from "EditBox.java"
+public class net.minecraft.client.gui.components.EditBox extends net.minecraft.client.gui.components.AbstractWidget {
+  public static final int BACKWARDS;
+  public static final int FORWARDS;
+  public static final int DEFAULT_TEXT_COLOR;
+  public static final net.minecraft.network.chat.Style DEFAULT_HINT_STYLE;
+  public static final net.minecraft.network.chat.Style SEARCH_HINT_STYLE;
+  public net.minecraft.client.gui.components.EditBox(net.minecraft.client.gui.Font, net.minecraft.network.chat.Component);
+  public net.minecraft.client.gui.components.EditBox(net.minecraft.client.gui.Font, int, int, net.minecraft.network.chat.Component);
+  public net.minecraft.client.gui.components.EditBox(net.minecraft.client.gui.Font, int, int, int, int, net.minecraft.network.chat.Component);
+  public net.minecraft.client.gui.components.EditBox(net.minecraft.client.gui.Font, int, int, int, int, net.minecraft.client.gui.components.EditBox, net.minecraft.network.chat.Component);
+  public void setResponder(java.util.function.Consumer<java.lang.String>);
+  public void addFormatter(net.minecraft.client.gui.components.EditBox$TextFormatter);
+  public void setValue(java.lang.String);
+  public java.lang.String getValue();
+  public java.lang.String getHighlighted();
+  public void setX(int);
+  public void setY(int);
+  public void insertText(java.lang.String);
+  public void deleteWords(int);
+  public void deleteChars(int);
+  public void deleteCharsToPos(int);
+  public int getWordPosition(int);
+  public void moveCursor(int, boolean);
+  public void moveCursorTo(int, boolean);
+  public void setCursorPosition(int);
+  public void moveCursorToStart(boolean);
+  public void moveCursorToEnd(boolean);
+  public boolean keyPressed(net.minecraft.client.input.KeyEvent);
+  public boolean canConsumeInput();
+  public boolean capturesInput();
+  public boolean charTyped(net.minecraft.client.input.CharacterEvent);
+  public boolean preeditUpdated(net.minecraft.client.input.PreeditEvent);
+  public void onClick(net.minecraft.client.input.MouseButtonEvent, boolean);
+  public void playDownSound(net.minecraft.client.sounds.SoundManager);
+  public void extractWidgetRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+  public void setMaxLength(int);
+  public int getCursorPosition();
+  public boolean isBordered();
+  public void setBordered(boolean);
+  public void setTextColor(int);
+  public void setTextColorUneditable(int);
+  public void setFocused(boolean);
+  public void setEditable(boolean);
+  public void setCentered(boolean);
+  public void setTextShadow(boolean);
+  public void setInvertHighlightedTextColor(boolean);
+  public int getInnerWidth();
+  public void setHighlightPos(int);
+  public void setCanLoseFocus(boolean);
+  public boolean isVisible();
+  public void setVisible(boolean);
+  public void setSuggestion(java.lang.String);
+  public int getScreenX(int);
+  public void updateWidgetNarration(net.minecraft.client.gui.narration.NarrationElementOutput);
+  public void setHint(net.minecraft.network.chat.Component);
 }
-=================== net.fabricmc.fabric.api.client.rendering.v1.level.LevelExtractionContext
-Compiled from "LevelExtractionContext.java"
-public interface net.fabricmc.fabric.api.client.rendering.v1.level.LevelExtractionContext extends net.fabricmc.fabric.api.client.rendering.v1.level.AbstractLevelRenderContext {
-  public abstract net.minecraft.client.multiplayer.ClientLevel level();
-  public abstract net.minecraft.client.Camera camera();
-  public abstract net.minecraft.client.DeltaTracker deltaTracker();
-}
-=================== net.minecraft.client.gui.components.events.ContainerEventHandler
-Compiled from "ContainerEventHandler.java"
-public interface net.minecraft.client.gui.components.events.ContainerEventHandler extends net.minecraft.client.gui.components.events.GuiEventListener {
-  public abstract java.util.List<? extends net.minecraft.client.gui.components.events.GuiEventListener> children();
-  public default java.util.Optional<net.minecraft.client.gui.components.events.GuiEventListener> getChildAt(double, double);
-  public default boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
-  public default boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent);
-  public default boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent, double, double);
-  public abstract boolean isDragging();
-  public abstract void setDragging(boolean);
-  public default boolean mouseScrolled(double, double, double, double);
-  public default boolean keyPressed(net.minecraft.client.input.KeyEvent);
-  public default boolean keyReleased(net.minecraft.client.input.KeyEvent);
-  public default boolean charTyped(net.minecraft.client.input.CharacterEvent);
-  public default boolean preeditUpdated(net.minecraft.client.input.PreeditEvent);
-  public default net.minecraft.client.gui.navigation.ScreenRectangle getBorderForArrowNavigation(net.minecraft.client.gui.navigation.ScreenDirection);
-  public abstract net.minecraft.client.gui.components.events.GuiEventListener getFocused();
-  public abstract void setFocused(net.minecraft.client.gui.components.events.GuiEventListener);
-  public default void setFocused(boolean);
-  public default boolean isFocused();
-  public default net.minecraft.client.gui.ComponentPath getCurrentFocusPath();
-  public default net.minecraft.client.gui.ComponentPath nextFocusPath(net.minecraft.client.gui.navigation.FocusNavigationEvent);
-}
-=================== net.minecraft.client.gui.components.events.GuiEventListener
-Compiled from "GuiEventListener.java"
-public interface net.minecraft.client.gui.components.events.GuiEventListener extends net.minecraft.client.gui.components.TabOrderedElement {
-  public default void mouseMoved(double, double);
-  public default boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
-  public default boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent);
-  public default boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent, double, double);
-  public default boolean mouseScrolled(double, double, double, double);
-  public default boolean keyPressed(net.minecraft.client.input.KeyEvent);
-  public default boolean keyReleased(net.minecraft.client.input.KeyEvent);
-  public default boolean charTyped(net.minecraft.client.input.CharacterEvent);
-  public default boolean preeditUpdated(net.minecraft.client.input.PreeditEvent);
-  public default net.minecraft.client.gui.ComponentPath nextFocusPath(net.minecraft.client.gui.navigation.FocusNavigationEvent);
-  public default boolean isMouseOver(double, double);
-  public abstract void setFocused(boolean);
-  public abstract boolean isFocused();
-  public default boolean shouldTakeFocusAfterInteraction();
-  public default boolean capturesInput();
-  public default net.minecraft.client.gui.ComponentPath getCurrentFocusPath();
-  public default net.minecraft.client.gui.navigation.ScreenRectangle getRectangle();
-  public default net.minecraft.client.gui.navigation.ScreenRectangle getBorderForArrowNavigation(net.minecraft.client.gui.navigation.ScreenDirection);
-}
+=================== net.minecraft.world.entity.Entity (filtered)
+  public double xo;
+  public double yo;
+  public double zo;
+  public float yRotO;
+  public float xRotO;
+  public final void setPos(net.minecraft.world.phys.Vec3);
+  public void setPos(double, double, double);
+  public void turn(double, double);
+  public final net.minecraft.world.phys.Vec3 getEyePosition();
+  public final net.minecraft.world.phys.Vec3 getEyePosition(float);
+  public void setYRot(float);
+  public void setXRot(float);
+=================== net.minecraft.client.Minecraft (filtered)
+  public final net.minecraft.client.gui.Gui gui;
+  public final net.minecraft.client.Options options;
+  public net.minecraft.world.entity.Entity getCameraEntity();
+  public void setCameraEntity(net.minecraft.world.entity.Entity);
+=================== net.minecraft.client.player.LocalPlayer (filtered)
+  public void sendOverlayMessage(net.minecraft.network.chat.Component);
+  public void resetPos();
+=================== net.minecraft.world.level.Level (filtered)
+  public boolean isClientSide();
+=================== capturesInput users
+net.minecraft.client.gui.screens.Screen: 329-         6: ifnull        27
+net.minecraft.client.gui.screens.Screen: 330-         9: aload_1
+net.minecraft.client.gui.screens.Screen: 331-        10: invokeinterface #350,  1          // InterfaceMethod net/minecraft/client/gui/ComponentPath.leafComponent:()Lnet/minecraft/client/gui/components/events/GuiEventListener;
+net.minecraft.client.gui.screens.Screen: 332:        15: invokeinterface #353,  1          // InterfaceMethod net/minecraft/client/gui/components/events/GuiEventListener.capturesInput:()Z
+net.minecraft.client.gui.screens.Screen: 333-        20: ifeq          27
+net.minecraft.client.gui.screens.Screen: 334-        23: iconst_1
+net.minecraft.client.gui.screens.Screen: 335-        24: goto          28
+net.minecraft.client.Minecraft: 36-
+net.minecraft.client.Minecraft: 37-  private final com.mojang.blaze3d.platform.SDLEventHandler sdlEventHandler;
+net.minecraft.client.Minecraft: 38-
+net.minecraft.client.Minecraft: 39:  private final com.mojang.blaze3d.platform.TextInputManager textInputManager;
+net.minecraft.client.Minecraft: 40-
+net.minecraft.client.Minecraft: 41-  private final net.minecraft.client.DeltaTracker$Timer deltaTracker;
+net.minecraft.client.Minecraft: 42-
+net.minecraft.client.Minecraft: --
+net.minecraft.client.Minecraft: 863-      1474: invokespecial #1121               // Method com/mojang/blaze3d/platform/SDLEventHandler."<init>":(Lnet/minecraft/client/Minecraft;Lcom/mojang/blaze3d/platform/Window;)V
+net.minecraft.client.Minecraft: 864-      1477: putfield      #1123               // Field sdlEventHandler:Lcom/mojang/blaze3d/platform/SDLEventHandler;
+net.minecraft.client.Minecraft: 865-      1480: aload_0
+net.minecraft.client.Minecraft: 866:      1481: new           #1125               // class com/mojang/blaze3d/platform/TextInputManager
+net.minecraft.client.Minecraft: 867-      1484: dup
+net.minecraft.client.Minecraft: 868-      1485: aload_0
+net.minecraft.client.Minecraft: 869-      1486: getfield      #1058               // Field window:Lcom/mojang/blaze3d/platform/Window;
+net.minecraft.client.Minecraft: 870:      1489: invokespecial #1128               // Method com/mojang/blaze3d/platform/TextInputManager."<init>":(Lcom/mojang/blaze3d/platform/Window;)V
+net.minecraft.client.Minecraft: 871:      1492: putfield      #1130               // Field textInputManager:Lcom/mojang/blaze3d/platform/TextInputManager;
+net.minecraft.client.Minecraft: 872-      1495: aload_0
+net.minecraft.client.Minecraft: 873-      1496: getfield      #1123               // Field sdlEventHandler:Lcom/mojang/blaze3d/platform/SDLEventHandler;
+net.minecraft.client.Minecraft: 874-      1499: invokevirtual #1133               // Method com/mojang/blaze3d/platform/SDLEventHandler.flushInputEvents:()V
+net.minecraft.client.Minecraft: --
+net.minecraft.client.Minecraft: 7296-         1: getfield      #1058               // Field window:Lcom/mojang/blaze3d/platform/Window;
+net.minecraft.client.Minecraft: 7297-         4: areturn
+net.minecraft.client.Minecraft: 7298-
+net.minecraft.client.Minecraft: 7299:  public com.mojang.blaze3d.platform.TextInputManager textInputManager();
+net.minecraft.client.Minecraft: 7300-    Code:
+net.minecraft.client.Minecraft: 7301-         0: aload_0
+net.minecraft.client.Minecraft: 7302:         1: getfield      #1130               // Field textInputManager:Lcom/mojang/blaze3d/platform/TextInputManager;
+net.minecraft.client.Minecraft: 7303-         4: areturn
+net.minecraft.client.Minecraft: 7304-
+net.minecraft.client.Minecraft: 7305:  public void onTextInputFocusChange(net.minecraft.client.gui.components.events.GuiEventListener, boolean);
+net.minecraft.client.Minecraft: 7306-    Code:
+net.minecraft.client.Minecraft: 7307-         0: aload_0
+net.minecraft.client.Minecraft: 7308:         1: getfield      #1130               // Field textInputManager:Lcom/mojang/blaze3d/platform/TextInputManager;
+net.minecraft.client.Minecraft: 7309-         4: aload_1
+net.minecraft.client.Minecraft: 7310-         5: iload_2
+net.minecraft.client.Minecraft: 7311:         6: invokevirtual #5220               // Method com/mojang/blaze3d/platform/TextInputManager.onTextInputFocusChange:(Ljava/lang/Object;Z)V
+net.minecraft.client.Minecraft: 7312-         9: aload_0
+net.minecraft.client.Minecraft: 7313-        10: getfield      #1539               // Field gui:Lnet/minecraft/client/gui/Gui;
+net.minecraft.client.Minecraft: 7314-        13: invokevirtual #2562               // Method net/minecraft/client/gui/Gui.screen:()Lnet/minecraft/client/gui/screens/Screen;
+net.minecraft.client.gui.components.EditBox: 778-        25: iconst_0
+net.minecraft.client.gui.components.EditBox: 779-        26: ireturn
+net.minecraft.client.gui.components.EditBox: 780-
+net.minecraft.client.gui.components.EditBox: 781:  public boolean capturesInput();
+net.minecraft.client.gui.components.EditBox: 782-    Code:
+net.minecraft.client.gui.components.EditBox: 783-         0: aload_0
+net.minecraft.client.gui.components.EditBox: 784-         1: invokevirtual #378                // Method canConsumeInput:()Z
+net.minecraft.client.gui.components.EditBox: --
+net.minecraft.client.gui.components.EditBox: 1240-       672: invokevirtual #378                // Method canConsumeInput:()Z
+net.minecraft.client.gui.components.EditBox: 1241-       675: ifeq          738
+net.minecraft.client.gui.components.EditBox: 1242-       678: invokestatic  #351                // Method net/minecraft/client/Minecraft.getInstance:()Lnet/minecraft/client/Minecraft;
+net.minecraft.client.gui.components.EditBox: 1243:       681: invokevirtual #572                // Method net/minecraft/client/Minecraft.textInputManager:()Lcom/mojang/blaze3d/platform/TextInputManager;
+net.minecraft.client.gui.components.EditBox: 1244-       684: iload         13
+net.minecraft.client.gui.components.EditBox: 1245-       686: aload_0
+net.minecraft.client.gui.components.EditBox: 1246-       687: getfield      #513                // Field textY:I
+net.minecraft.client.gui.components.EditBox: --
+net.minecraft.client.gui.components.EditBox: 1257-       708: iadd
+net.minecraft.client.gui.components.EditBox: 1258-       709: iconst_1
+net.minecraft.client.gui.components.EditBox: 1259-       710: iadd
+net.minecraft.client.gui.components.EditBox: 1260:       711: invokevirtual #578                // Method com/mojang/blaze3d/platform/TextInputManager.setTextInputArea:(IIII)V
+net.minecraft.client.gui.components.EditBox: 1261-       714: goto          738
+net.minecraft.client.gui.components.EditBox: 1262-       717: aload_0
+net.minecraft.client.gui.components.EditBox: 1263-       718: getfield      #406                // Field preeditOverlay:Lnet/minecraft/client/gui/components/IMEPreeditOverlay;
+net.minecraft.client.gui.components.EditBox: --
+net.minecraft.client.gui.components.EditBox: 1445-        35: invokestatic  #351                // Method net/minecraft/client/Minecraft.getInstance:()Lnet/minecraft/client/Minecraft;
+net.minecraft.client.gui.components.EditBox: 1446-        38: aload_0
+net.minecraft.client.gui.components.EditBox: 1447-        39: iload_1
+net.minecraft.client.gui.components.EditBox: 1448:        40: invokevirtual #648                // Method net/minecraft/client/Minecraft.onTextInputFocusChange:(Lnet/minecraft/client/gui/components/events/GuiEventListener;Z)V
+net.minecraft.client.gui.components.EditBox: 1449-        43: return
+net.minecraft.client.gui.components.EditBox: 1450-
+net.minecraft.client.gui.components.EditBox: 1451-  private boolean isEditable();
+net.minecraft.client.gui.components.EditBox: --
+net.minecraft.client.gui.components.EditBox: 1462-         7: invokestatic  #351                // Method net/minecraft/client/Minecraft.getInstance:()Lnet/minecraft/client/Minecraft;
+net.minecraft.client.gui.components.EditBox: 1463-        10: aload_0
+net.minecraft.client.gui.components.EditBox: 1464-        11: iload_1
+net.minecraft.client.gui.components.EditBox: 1465:        12: invokevirtual #648                // Method net/minecraft/client/Minecraft.onTextInputFocusChange:(Lnet/minecraft/client/gui/components/events/GuiEventListener;Z)V
+net.minecraft.client.gui.components.EditBox: 1466-        15: aload_0
+net.minecraft.client.gui.components.EditBox: 1467-        16: iload_1
+net.minecraft.client.gui.components.EditBox: 1468-        17: putfield      #87                 // Field isEditable:Z
+net.minecraft.client.gui.Gui: 456-        60: invokevirtual #488                // Method net/minecraft/client/gui/screens/Screen.clearFocus:()V
+net.minecraft.client.gui.Gui: 457-        63: aload_0
+net.minecraft.client.gui.Gui: 458-        64: getfield      #85                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+net.minecraft.client.gui.Gui: 459:        67: invokevirtual #492                // Method net/minecraft/client/Minecraft.textInputManager:()Lcom/mojang/blaze3d/platform/TextInputManager;
+net.minecraft.client.gui.Gui: 460:        70: invokevirtual #497                // Method com/mojang/blaze3d/platform/TextInputManager.stopTextInput:()V
+net.minecraft.client.gui.Gui: 461-        73: aload_0
+net.minecraft.client.gui.Gui: 462-        74: getfield      #186                // Field screen:Lnet/minecraft/client/gui/screens/Screen;
+net.minecraft.client.gui.Gui: 463-        77: invokevirtual #500                // Method net/minecraft/client/gui/screens/Screen.removed:()V
+net.minecraft.client.gui.Gui: --
+net.minecraft.client.gui.Gui: 566-       322: goto          368
+net.minecraft.client.gui.Gui: 567-       325: aload_0
+net.minecraft.client.gui.Gui: 568-       326: getfield      #85                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+net.minecraft.client.gui.Gui: 569:       329: invokevirtual #492                // Method net/minecraft/client/Minecraft.textInputManager:()Lcom/mojang/blaze3d/platform/TextInputManager;
+net.minecraft.client.gui.Gui: 570:       332: invokevirtual #497                // Method com/mojang/blaze3d/platform/TextInputManager.stopTextInput:()V
+net.minecraft.client.gui.Gui: 571-       335: aload_0
+net.minecraft.client.gui.Gui: 572-       336: getfield      #85                 // Field minecraft:Lnet/minecraft/client/Minecraft;
+net.minecraft.client.gui.Gui: 573-       339: getfield      #204                // Field net/minecraft/client/Minecraft.level:Lnet/minecraft/client/multiplayer/ClientLevel;
