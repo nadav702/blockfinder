@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1, "id": "blockfinder", "version": "${version}",
+  "name": "Block Finder", "description": "Pick any block from a clean menu and highlight every one within 300 blocks.",
+  "environment": "client", "icon": "assets/blockfinder/icon.png",
+  "entrypoints": { "client": ["com.blockfinder.BlockFinderClient"] },
+  "depends": { "fabricloader": "*", "fabric-api": "*", "minecraft": "~26.3" }
+}

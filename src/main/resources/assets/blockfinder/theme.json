@@ -1,0 +1,11 @@
+{
+  "_comment": "Resource packs can override this file to recolour Block Finder. Colours are ARGB hex.",
+  "accent":        "FF4FC3F7",
+  "background":    "E0101418",
+  "text":          "FFFFFFFF",
+  "subtext":       "FF8A96A3",
+  "outline_near":  "FF4FE0FF",
+  "outline_far":   "FFA060FF",
+  "outline_width": 2.0,
+  "pulse":         true
+}

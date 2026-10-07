@@ -1,0 +1,12 @@
+plugins { id 'net.fabricmc.fabric-loom' version "${loom_version}" }
+version = project.mod_version
+group = 'com.blockfinder'
+base { archivesName = 'blockfinder' }
+repositories { mavenCentral() }
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+}
+processResources { inputs.property "version", version; filesMatching("fabric.mod.json") { expand "version": version } }
+java { toolchain.languageVersion = JavaLanguageVersion.of(25) }

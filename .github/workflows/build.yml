@@ -1,0 +1,23 @@
+name: Build Block Finder jar
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '25' }
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: '9.1.0' }
+      - name: Use latest Fabric versions for 26.3
+        run: |
+          L=$(curl -s https://meta.fabricmc.net/v2/versions/loader | jq -r '.[0].version')
+          F=$(curl -s "https://api.modrinth.com/v2/project/fabric-api/version?game_versions=%5B%2226.3%22%5D&loaders=%5B%22fabric%22%5D" | jq -r '.[0].version_number')
+          [ -n "$L" ] && sed -i "s/^loader_version=.*/loader_version=$L/" gradle.properties
+          [ -n "$F" ] && [ "$F" != null ] && sed -i "s/^fabric_version=.*/fabric_version=$F/" gradle.properties
+          cat gradle.properties
+      - run: gradle build --stacktrace
+      - uses: actions/upload-artifact@v4
+        with:
+          name: blockfinder-jar
+          path: build/libs/*.jar
