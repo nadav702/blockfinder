@@ -6090,144 +6090,144 @@ lwjgl-3.4.3.jar :: org/lwjgl/system/windows/WindowProcI.class
 lwjgl-3.4.3.jar :: org/lwjgl/system/windows/WindowsLibrary.class
 lwjgl-3.4.3.jar :: org/lwjgl/system/windows/WindowsUtil.class
 lwjgl-3.4.3.jar :: org/lwjgl/system/windows/package-info.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/ProjectionType$LayeringTransform.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/ProjectionType.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/TracyFrameCapture$Status.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/Blaze3D.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/TracyBootstrap.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/TracyFrameCapture$Status.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/TracyFrameCapture.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/AbstractDeviceTracker.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/CallbackDeviceTracker.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/Blaze3D.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/Channel.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/DeviceList.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/DeviceTracker.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/Library$ChannelPool.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/Library$CountingChannelPool.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/ProjectionType$LayeringTransform.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/Library$Pool.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/DeviceList.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/Library.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/Listener.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/ListenerTransform.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/TracyFrameCapture.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/ProjectionType.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/CallbackDeviceTracker.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/PollingDeviceTracker.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/SoundBuffer.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/package-info.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/OpenAlUtil.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/buffers/Std140Builder.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/buffers/Std140SizeCalculator.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/buffers/package-info.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/GlyphBitmap.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/GlyphInfo.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/Channel.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/OpenAlUtil.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/GlyphProvider.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/GlyphProvider$Conditional.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/SpaceProvider.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/SpaceProvider$Definition.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/Library.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/SpaceProvider.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/TrueTypeGlyphProvider$Glyph.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/TrueTypeGlyphProvider$GlyphEntry.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/TrueTypeGlyphProvider.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/UnbakedGlyph$Stitcher.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/UnbakedGlyph.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/package-info.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/framegraph/FrameGraphBuilder$ExternalResource.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/framegraph/FrameGraphBuilder$Handle.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/ListenerTransform.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/framegraph/FrameGraphBuilder$Inspector.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/framegraph/FrameGraphBuilder$InternalVirtualResource.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/buffers/Std140Builder.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/framegraph/FrameGraphBuilder$Pass.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/framegraph/FrameGraphBuilder$VirtualResource.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/framegraph/FramePass.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/framegraph/FrameGraphBuilder.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/audio/Library$CountingChannelPool.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/framegraph/package-info.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/framegraph/FramePass.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/package-info.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/pipeline/MainTarget$Dimension.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/framegraph/FrameGraphBuilder.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/pipeline/MainTarget.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/pipeline/PipelineCache.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/TrueTypeGlyphProvider$Glyph.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/pipeline/package-info.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/GlyphProvider$Conditional.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/pipeline/TextureTarget.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/ClipboardManager.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/pipeline/package-info.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/ClientShutdownWatchdog.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/DebugMemoryUntracker.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/pipeline/RenderTarget.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/ClipboardManager.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/DisplayData.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/DebugMemoryUntracker.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/FramerateLimitTracker$FramerateThrottleReason.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/IconSet.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/FramerateLimitTracker.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/IconSet.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/framegraph/FrameGraphBuilder$Handle.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/InputConstants$Key.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/InputConstants$Value.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/font/TrueTypeGlyphProvider.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/Lighting$Entry.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/InputConstants.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/Lighting.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/MacosUtil$DisabledActions.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/MacosUtil.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/Lighting.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/MessageBox.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/MonitorManager.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/NativeImage$Format.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/Monitor.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/NativeImage$WriteCallback.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/pipeline/RenderTarget.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/NativeLibrariesBootstrap$CapturingPrintStream.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/NativeImage$Format.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/pipeline/PipelineCache.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/NativeLibrariesBootstrap$CapturingStream.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/NativeLibrariesBootstrap$LibraryLoadEntry.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/NativeImage.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/NativeLibrariesBootstrap.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/NativeLibrariesBootstrap$CapturingPrintStream.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/InputConstants$Type.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/SDLEventHandler.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/SdlDebug.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/TextInputManager.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/Transparency.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/Monitor.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/TextureUtil.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/VideoMode.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/Window$FramebufferSize.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/Window$WindowInitFailed.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/VideoMode.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/WindowEventHandler.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/cursor/CursorType.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/cursor/CursorTypes.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/cursor/package-info.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/package-info.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/resource/CrossFrameResourcePool$ResourceEntry.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/NativeImage.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/resource/CrossFrameResourcePool.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/resource/GraphicsResourceAllocator.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/resource/RenderTargetDescriptor$TextureProperties.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/resource/RenderTargetDescriptor.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/SDLEventHandler.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/resource/ResourceDescriptor.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/resource/ResourceHandle.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/resource/package-info.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/systems/RenderSystem$AutoStorageIndexBuffer$IndexGenerator.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/NativeLibrariesBootstrap.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/systems/RenderSystem$AutoStorageIndexBuffer.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/TextureUtil.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/systems/RenderSystem.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/systems/RenderSystem$GpuAsyncTask.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/resource/RenderTargetDescriptor.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/systems/SamplerCache.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/systems/ScissorState.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/systems/TimerQuery$Status.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/systems/TimerQuery.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/systems/package-info.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/BufferBuilder.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/resource/CrossFrameResourcePool$ResourceEntry.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/ByteBufferBuilder$Result.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/Window.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/ByteBufferBuilder.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/CompactVectorArray.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/systems/SamplerCache.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/DefaultVertexFormat.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/MeshData$DrawState.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/MeshData.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/MeshData$SortState.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/systems/RenderSystem$GpuAsyncTask.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/MeshData.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/PoseStack.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/PoseStack$Pose.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/QuadInstance.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/SheetedDecalTextureGenerator.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/StagingBuffer$BufferHandle.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/StagingBuffer$Cpu.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/StagingBuffer$Uploader.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/StagingBuffer$PersistentlyMapped.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/StagingBuffer$Uploader.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/systems/RenderSystem.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/TlsfAllocator$Allocation.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/StagingBuffer.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/TlsfAllocator$Block.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/TlsfAllocator$Heap.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/platform/Window.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/TlsfAllocator.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/UberGpuBuffer$StagedAllocationEntry.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/UberGpuBuffer$UberGpuBufferHeap.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/UberGpuBuffer$UploadCallback.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/PoseStack$Pose.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/VertexSorting$DistanceFunction.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/VertexSorting.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/package-info.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/UberGpuBuffer.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/TlsfAllocator$IndexPair.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/TlsfAllocator.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/StagingBuffer.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/BufferBuilder.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/UberGpuBuffer$UploadCallback.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/UberGpuBuffer$UberGpuBufferHeap.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/VertexConsumer.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/VertexSorting$DistanceFunction.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/UberGpuBuffer.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/package-info.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/VertexSorting.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/StagingBuffer$BufferHandle.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: com/mojang/blaze3d/vertex/UberGpuBuffer$StagedAllocationEntry.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/KeyMapping$Category.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/KeyMapping.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/ToggleKeyMapping.class
@@ -6239,18 +6239,18 @@ minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/gui/font/GlyphRende
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/CharacterEvent.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/InputWithModifiers$Modifiers.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/InputQuirks.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/KeyEvent$Action.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/InputWithModifiers.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/KeyEvent.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/MouseButtonEvent.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/MouseButtonInfo$Action.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/MouseButtonInfo$MouseButton.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/MouseButtonEvent.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/MouseButtonInfo.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/package-info.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/PreeditEvent.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/KeyEvent$Action.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/input/KeyEvent.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/particle/ParticleRenderType.class
-minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/renderer/RenderPipelines.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/renderer/StagedVertexBuffer$Draw.class
+minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/renderer/RenderPipelines.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/renderer/StagedVertexBuffer$ExecuteInfo.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/renderer/StagedVertexBuffer$GpuBufferPool$PendingRecycle.class
 minecraft-merged-7e9a32a5b8-26.3.jar :: net/minecraft/client/renderer/StagedVertexBuffer$GpuBufferPool.class
@@ -6307,3 +6307,254 @@ fabric-key-mapping-api-v1-2.0.8+3434d6d95d.jar :: net/fabricmc/fabric/mixin/clie
 fabric-key-mapping-api-v1-2.0.8+3434d6d95d.jar :: net/fabricmc/fabric/mixin/client/keymapping/KeyMappingCategoryMixin.class
 fabric-key-mapping-api-v1-2.0.8+3434d6d95d.jar :: net/fabricmc/fabric/mixin/client/keymapping/OptionsMixin.class
 fabric-key-mapping-api-v1-2.0.8+3434d6d95d.jar :: net/fabricmc/fabric/mixin/client/keymapping/package-info.class
+com/mojang/renderpearl/
+com/mojang/renderpearl/api/
+com/mojang/renderpearl/api/GpuFormat$ComponentType.class
+com/mojang/renderpearl/api/buffers/
+com/mojang/renderpearl/api/buffers/GpuBuffer$Usage.class
+com/mojang/renderpearl/api/GpuFormat.class
+com/mojang/renderpearl/api/buffers/GpuBufferSlice$MappedView.class
+com/mojang/renderpearl/api/buffers/GpuBufferSlice.class
+com/mojang/renderpearl/api/buffers/TransientMemory.class
+com/mojang/renderpearl/api/buffers/package-info.class
+com/mojang/renderpearl/api/commands/
+com/mojang/renderpearl/api/commands/CommandEncoder.class
+com/mojang/renderpearl/api/commands/GpuFence.class
+com/mojang/renderpearl/api/commands/GpuQuery.class
+com/mojang/renderpearl/api/commands/GpuQueryPool.class
+com/mojang/renderpearl/api/commands/RenderPass$Draw.class
+com/mojang/renderpearl/api/commands/RenderPass$RenderArea.class
+com/mojang/renderpearl/api/commands/RenderPass$UniformUploader.class
+com/mojang/renderpearl/api/commands/RenderPassDescriptor$Attachment.class
+com/mojang/renderpearl/api/commands/RenderPassDescriptor$Builder.class
+com/mojang/renderpearl/api/commands/RenderPassDescriptor.class
+com/mojang/renderpearl/api/commands/package-info.class
+com/mojang/renderpearl/api/device/
+com/mojang/renderpearl/api/device/BackendCreationException$Reason.class
+com/mojang/renderpearl/api/device/BackendCreationException.class
+com/mojang/renderpearl/api/device/DeviceFeatures.class
+com/mojang/renderpearl/api/device/DeviceInfo.class
+com/mojang/renderpearl/api/device/DeviceLimits.class
+com/mojang/renderpearl/api/device/DeviceType.class
+com/mojang/renderpearl/api/device/GpuBackend.class
+com/mojang/renderpearl/api/device/GpuDebugOptions.class
+com/mojang/renderpearl/api/device/GpuDeviceLossException.class
+com/mojang/renderpearl/api/device/GpuDevice.class
+com/mojang/renderpearl/api/device/GpuOutOfMemoryException.class
+com/mojang/renderpearl/api/device/GpuSurface$Configuration.class
+com/mojang/renderpearl/api/device/GpuSurface$PresentMode.class
+com/mojang/renderpearl/api/device/GpuSurface.class
+com/mojang/renderpearl/api/device/SurfaceException.class
+com/mojang/renderpearl/api/device/package-info.class
+com/mojang/renderpearl/api/device/HintsAndWorkarounds.class
+com/mojang/renderpearl/api/package-info.class
+com/mojang/renderpearl/api/buffers/GpuBuffer.class
+com/mojang/renderpearl/api/pipeline/
+com/mojang/renderpearl/api/pipeline/BindGroupLayout$UniformDescription.class
+com/mojang/renderpearl/api/pipeline/BlendEquation.class
+com/mojang/renderpearl/api/pipeline/BindGroupLayout.class
+com/mojang/renderpearl/api/pipeline/BlendFactor.class
+com/mojang/renderpearl/api/pipeline/BlendFunction.class
+com/mojang/renderpearl/api/pipeline/BlendOp.class
+com/mojang/renderpearl/api/pipeline/ColorTargetState$WriteMask.class
+com/mojang/renderpearl/api/commands/RenderPass.class
+com/mojang/renderpearl/api/pipeline/CompiledRenderPipeline$Pending.class
+com/mojang/renderpearl/api/pipeline/CompiledRenderPipeline.class
+com/mojang/renderpearl/api/pipeline/CompareOp.class
+com/mojang/renderpearl/api/pipeline/IndexType.class
+com/mojang/renderpearl/api/pipeline/DepthStencilState.class
+com/mojang/renderpearl/api/pipeline/PolygonMode.class
+com/mojang/renderpearl/api/pipeline/PrimitiveTopology.class
+com/mojang/renderpearl/api/pipeline/RenderPipeline$Snippet.class
+com/mojang/renderpearl/api/pipeline/RenderPipeline.class
+com/mojang/renderpearl/api/pipeline/RenderPipeline$Builder.class
+com/mojang/renderpearl/api/pipeline/ShaderSource.class
+com/mojang/renderpearl/api/pipeline/ShaderSource$CachedIncludeSource.class
+com/mojang/renderpearl/api/pipeline/ShaderType.class
+com/mojang/renderpearl/api/pipeline/UniformType.class
+com/mojang/renderpearl/api/pipeline/package-info.class
+com/mojang/renderpearl/api/textures/
+com/mojang/renderpearl/api/textures/AddressMode.class
+com/mojang/renderpearl/api/textures/GpuSampler.class
+com/mojang/renderpearl/api/textures/GpuTexture$Usage.class
+com/mojang/renderpearl/api/textures/GpuTexture.class
+com/mojang/renderpearl/api/textures/GpuTextureView.class
+com/mojang/renderpearl/api/textures/package-info.class
+com/mojang/renderpearl/api/vertex/
+com/mojang/renderpearl/api/vertex/VertexFormat$Builder.class
+com/mojang/renderpearl/api/vertex/VertexFormat.class
+com/mojang/renderpearl/api/pipeline/ColorTargetState.class
+com/mojang/renderpearl/api/vertex/package-info.class
+com/mojang/renderpearl/api/pipeline/BindGroupLayout$Builder.class
+com/mojang/renderpearl/backend/
+com/mojang/renderpearl/backend/api/
+com/mojang/renderpearl/backend/api/BackendRenderPipeline$CreateInfo$Shader.class
+com/mojang/renderpearl/api/vertex/VertexFormatElement.class
+com/mojang/renderpearl/backend/api/BackendRenderPipeline$CreateInfo$VertexBuffer.class
+com/mojang/renderpearl/backend/api/BackendRenderPipeline$CreateInfo.class
+com/mojang/renderpearl/backend/api/BackendRenderPipeline$Pending.class
+com/mojang/renderpearl/backend/api/BackendRenderPipeline.class
+com/mojang/renderpearl/backend/api/CommandEncoderBackend.class
+com/mojang/renderpearl/backend/api/GpuDeviceBackend.class
+com/mojang/renderpearl/backend/api/GpuSurfaceBackend.class
+com/mojang/renderpearl/backend/api/RenderPassBackend.class
+com/mojang/renderpearl/backend/api/SpvModule$Reflection$Descriptor.class
+com/mojang/renderpearl/backend/api/SpvModule$Reflection$InterfaceVariable.class
+com/mojang/renderpearl/backend/api/SpvModule$Reflection$PushConstant.class
+com/mojang/renderpearl/backend/api/SpvModule$Reflection$Type.class
+com/mojang/renderpearl/backend/api/SpvModule$Reflection.class
+com/mojang/renderpearl/backend/api/SpvModule.class
+com/mojang/renderpearl/backend/api/package-info.class
+com/mojang/renderpearl/backend/common/
+com/mojang/renderpearl/backend/common/BaseGpuBuffer.class
+com/mojang/renderpearl/backend/common/BaseGpuTexture.class
+com/mojang/renderpearl/backend/common/BaseGpuTextureView.class
+com/mojang/renderpearl/backend/common/package-info.class
+com/mojang/renderpearl/backend/opengl/
+com/mojang/renderpearl/backend/opengl/BufferStorage$Immutable.class
+com/mojang/renderpearl/api/textures/FilterMode.class
+com/mojang/renderpearl/backend/opengl/BufferStorage.class
+com/mojang/renderpearl/backend/opengl/DirectStateAccess$Core.class
+com/mojang/renderpearl/backend/opengl/DirectStateAccess$Emulated.class
+com/mojang/renderpearl/backend/opengl/DirectStateAccess.class
+com/mojang/renderpearl/backend/opengl/FrameBufferAttachment.class
+com/mojang/renderpearl/backend/opengl/FrameBufferCache$CacheKey.class
+com/mojang/renderpearl/backend/opengl/FrameBufferCache.class
+com/mojang/renderpearl/backend/opengl/GlBackend.class
+com/mojang/renderpearl/backend/opengl/GlBuffer.class
+com/mojang/renderpearl/backend/opengl/GlBuffer$Direct.class
+com/mojang/renderpearl/backend/opengl/GlConst.class
+com/mojang/renderpearl/backend/opengl/GlDebug$LogEntry.class
+com/mojang/renderpearl/backend/opengl/GlCommandEncoder.class
+com/mojang/renderpearl/backend/api/BackendRenderPipeline$CreateInfo$AttribBinding.class
+com/mojang/renderpearl/backend/opengl/GlDebugLabel$Empty.class
+com/mojang/renderpearl/backend/opengl/GlDebugLabel$Ext.class
+com/mojang/renderpearl/backend/opengl/GlDebugLabel.class
+com/mojang/renderpearl/backend/opengl/GlDevice.class
+com/mojang/renderpearl/backend/opengl/GlFence.class
+com/mojang/renderpearl/backend/opengl/BufferStorage$Mutable.class
+com/mojang/renderpearl/backend/opengl/GlHeuristics.class
+com/mojang/renderpearl/backend/opengl/GlDebug.class
+com/mojang/renderpearl/backend/opengl/GlDebugLabel$Core.class
+com/mojang/renderpearl/backend/opengl/GlQueryPool.class
+com/mojang/renderpearl/backend/opengl/GlRenderPipeline.class
+com/mojang/renderpearl/backend/opengl/GlRenderPass.class
+com/mojang/renderpearl/backend/opengl/GlShaderModule.class
+com/mojang/renderpearl/backend/opengl/GlSampler.class
+com/mojang/renderpearl/backend/opengl/GlStateManager$BlendState.class
+com/mojang/renderpearl/backend/opengl/GlStateManager$BooleanState.class
+com/mojang/renderpearl/backend/opengl/GlStateManager$ColorLogicState.class
+com/mojang/renderpearl/backend/opengl/GlStateManager$CullState.class
+com/mojang/renderpearl/backend/opengl/GlStateManager$DepthState.class
+com/mojang/renderpearl/backend/opengl/GlStateManager$PolygonOffsetState.class
+com/mojang/renderpearl/backend/opengl/GlStateManager$ScissorState.class
+com/mojang/renderpearl/backend/opengl/GlStateManager$TextureState.class
+com/mojang/renderpearl/backend/opengl/GlSurface.class
+com/mojang/renderpearl/backend/opengl/GlTexture.class
+com/mojang/renderpearl/backend/opengl/GlTextureView.class
+com/mojang/renderpearl/backend/opengl/GlTransientMemory$Fallback$GlAllocation.class
+com/mojang/renderpearl/backend/opengl/GlPipelineRecompiler.class
+com/mojang/renderpearl/backend/opengl/GlTransientMemory$PersistentMapping$GlAllocation.class
+com/mojang/renderpearl/backend/opengl/GlTransientMemory$Fallback.class
+com/mojang/renderpearl/backend/opengl/GlTransientMemory$PersistentMapping$Rotation.class
+com/mojang/renderpearl/backend/opengl/GlTransientMemory$TransientGpuBuffer.class
+com/mojang/renderpearl/backend/opengl/GlProgram.class
+com/mojang/renderpearl/backend/opengl/GlUtil.class
+com/mojang/renderpearl/backend/opengl/GlTransientMemory.class
+com/mojang/renderpearl/backend/opengl/Uniform$Sampler.class
+com/mojang/renderpearl/backend/opengl/Uniform$Ubo.class
+com/mojang/renderpearl/backend/opengl/Uniform.class
+com/mojang/renderpearl/backend/opengl/Uniform$Utb.class
+com/mojang/renderpearl/backend/opengl/VertexArray$Emulated.class
+com/mojang/renderpearl/backend/opengl/VertexArray$Separate.class
+com/mojang/renderpearl/backend/opengl/VertexArray.class
+com/mojang/renderpearl/backend/opengl/package-info.class
+com/mojang/renderpearl/backend/package-info.class
+com/mojang/renderpearl/backend/util/
+com/mojang/renderpearl/backend/util/TransientBlockAllocator$Allocation.class
+com/mojang/renderpearl/backend/util/TransientBlockAllocator$Allocator$Block.class
+com/mojang/renderpearl/backend/util/TransientBlockAllocator$Allocator.class
+com/mojang/renderpearl/backend/util/TransientBlockAllocator$Allocator$CpuBlock.class
+com/mojang/renderpearl/backend/util/package-info.class
+com/mojang/renderpearl/backend/vulkan/
+com/mojang/renderpearl/backend/vulkan/Destroyable.class
+com/mojang/renderpearl/backend/vulkan/DestructionQueue$Destroyer.class
+com/mojang/renderpearl/backend/vulkan/DestructionQueue.class
+com/mojang/renderpearl/backend/util/TransientBlockAllocator.class
+com/mojang/renderpearl/backend/opengl/GlTransientMemory$PersistentMapping.class
+com/mojang/renderpearl/backend/opengl/GlStateManager.class
+com/mojang/renderpearl/backend/vulkan/VulkanCommandPool.class
+com/mojang/renderpearl/backend/vulkan/VulkanConst.class
+com/mojang/renderpearl/backend/vulkan/VulkanDebug$Disabled.class
+com/mojang/renderpearl/backend/vulkan/VulkanDebug.class
+com/mojang/renderpearl/backend/vulkan/VulkanDebug$Enabled.class
+com/mojang/renderpearl/backend/vulkan/VulkanFeatureSets.class
+com/mojang/renderpearl/backend/vulkan/VulkanDevice.class
+com/mojang/renderpearl/backend/vulkan/VulkanGpuBuffer.class
+com/mojang/renderpearl/backend/vulkan/VulkanGpuBuffer$Direct.class
+com/mojang/renderpearl/backend/vulkan/VulkanGpuSampler.class
+com/mojang/renderpearl/backend/vulkan/VulkanCommandEncoder.class
+com/mojang/renderpearl/backend/vulkan/VulkanGpuTextureView.class
+com/mojang/renderpearl/backend/vulkan/VulkanInstance.class
+com/mojang/renderpearl/backend/vulkan/VulkanPhysicalDevice.class
+com/mojang/renderpearl/backend/vulkan/VulkanQueryPool.class
+com/mojang/renderpearl/backend/vulkan/VulkanQueue$Submission$SemaphoreOp.class
+com/mojang/renderpearl/backend/vulkan/VulkanBackend.class
+com/mojang/renderpearl/backend/vulkan/VulkanGpuSurface.class
+com/mojang/renderpearl/backend/vulkan/VulkanQueue.class
+com/mojang/renderpearl/backend/vulkan/VulkanQueue$Submission.class
+com/mojang/renderpearl/backend/vulkan/VulkanGpuTexture.class
+com/mojang/renderpearl/backend/vulkan/VulkanQueue$Submission$SubmitStage.class
+com/mojang/renderpearl/backend/vulkan/VulkanTransientMemory$TransferPair.class
+com/mojang/renderpearl/backend/vulkan/VulkanTransientMemory$VulkanAllocation.class
+com/mojang/renderpearl/backend/vulkan/VulkanTransientMemory.class
+com/mojang/renderpearl/backend/vulkan/VulkanUtils$DeviceUUID.class
+com/mojang/renderpearl/backend/vulkan/VulkanTransientMemory$TransientGpuBuffer.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/
+com/mojang/renderpearl/backend/vulkan/checkpoints/AbstractCheckpointStorage$Checkpoint.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/AbstractCheckpointStorage$Frame.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/AbstractCheckpointStorage.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/AmdCheckpointExtension$AmdCheckpointStorage.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/AmdCheckpointExtension.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/CheckpointExtension$CheckpointStorage.class
+com/mojang/renderpearl/backend/vulkan/VulkanUtils.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/CheckpointExtension$CheckpointType.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/CheckpointExtension$QueueCheckpoints.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/CheckpointExtension$StageCheckpoint.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/CheckpointExtension.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/NoopCheckpointExtension$NoopCheckpointStorage.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/NoopCheckpointExtension.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/NvidiaCheckpointExtension.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/NvidiaCheckpointExtension$NvidiaCheckpointStorage.class
+com/mojang/renderpearl/backend/vulkan/checkpoints/package-info.class
+com/mojang/renderpearl/backend/vulkan/init/
+com/mojang/renderpearl/backend/vulkan/init/FeatureSet$Condition.class
+com/mojang/renderpearl/backend/vulkan/init/VulkanFeature.class
+com/mojang/renderpearl/backend/vulkan/init/FeatureSet.class
+com/mojang/renderpearl/backend/vulkan/init/package-info.class
+com/mojang/renderpearl/backend/vulkan/package-info.class
+com/mojang/renderpearl/backend/vulkan/VulkanRenderPass.class
+com/mojang/renderpearl/backend/vulkan/VulkanRenderPipeline.class
+com/mojang/renderpearl/frontend/
+com/mojang/renderpearl/frontend/FrontendGpuDevice.class
+com/mojang/renderpearl/frontend/FrontendGpuSurface.class
+com/mojang/renderpearl/frontend/FrontendRenderPipeline.class
+com/mojang/renderpearl/frontend/TracyGpuProfiler.class
+com/mojang/renderpearl/frontend/package-info.class
+com/mojang/renderpearl/frontend/shaders/
+com/mojang/renderpearl/frontend/shaders/GlslCompiler.class
+com/mojang/renderpearl/frontend/FrontendRenderPass.class
+com/mojang/renderpearl/frontend/shaders/PipelineBuilder$InterfaceVariableInfo.class
+com/mojang/renderpearl/backend/vulkan/init/VulkanPNextStruct.class
+com/mojang/renderpearl/frontend/shaders/PipelineBuilder.class
+com/mojang/renderpearl/frontend/shaders/SpvUtil.class
+com/mojang/renderpearl/frontend/shaders/package-info.class
+com/mojang/renderpearl/package-info.class
+com/mojang/renderpearl/util/
+com/mojang/renderpearl/util/ShaderCompileException.class
+com/mojang/renderpearl/util/TextureViewAndSampler.class
+com/mojang/renderpearl/frontend/shaders/SPIRVModule.class
+com/mojang/renderpearl/util/UncheckedAutoCloseable.class
+com/mojang/renderpearl/util/package-info.class
+com/mojang/renderpearl/frontend/shaders/SPIRVModule$TypeHandle.class
+com/mojang/renderpearl/frontend/FrontendCommandEncoder.class
