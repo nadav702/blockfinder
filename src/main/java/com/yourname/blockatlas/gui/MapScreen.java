@@ -80,6 +80,16 @@ public class MapScreen extends ScaledScreen {
     }
 
     @Override
+    protected int minWidth() {
+        return 540;
+    }
+
+    @Override
+    protected int minHeight() {
+        return 340; // sidebar list + deep-scan card both need room
+    }
+
+    @Override
     protected void initScaled() {
         openedAt = System.currentTimeMillis();
         buttons.clear();

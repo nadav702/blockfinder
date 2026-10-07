@@ -46,7 +46,7 @@ import java.util.function.Predicate;
 public final class DeepScanner {
     private static final DeepScanner INSTANCE = new DeepScanner();
     private static final int MAX_READS_IN_FLIGHT = 48;
-    private static final int MAX_GEN_IN_FLIGHT = 6;
+    private static final int MAX_GEN_IN_FLIGHT = 16;
     private static final Set<String> ORES_PLACED = Set.of(
             "minecraft:features", "minecraft:initialize_light", "minecraft:light", "minecraft:spawn", "minecraft:full");
 
@@ -220,9 +220,14 @@ public final class DeepScanner {
             requestRead(cx, cz, gen);
         }
 
-        // generation of missing chunks, a few at a time
+        // generation of missing chunks: more in parallel while the game runs smoothly,
+        // fewer when the integrated server is busy (average tick time)
         if (generateMissing) {
-            while (genInFlight.get() < MAX_GEN_IN_FLIGHT) {
+            long tickNanos = server.getAverageTickTimeNanos();
+            int limit = tickNanos < 25_000_000L ? MAX_GEN_IN_FLIGHT
+                    : tickNanos < 40_000_000L ? MAX_GEN_IN_FLIGHT / 2
+                    : 2;
+            while (genInFlight.get() < limit) {
                 Long key = needGen.poll();
                 if (key == null) break;
                 genInFlight.incrementAndGet();

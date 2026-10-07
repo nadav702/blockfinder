@@ -25,6 +25,15 @@ public abstract class ScaledScreen extends Screen {
         return false;
     }
 
+    /** Smallest virtual size the layout needs; the screen shrinks below the user's scale if needed. */
+    protected int minWidth() {
+        return 380;
+    }
+
+    protected int minHeight() {
+        return 250;
+    }
+
     /** Layout using {@link #sw} / {@link #sh}. */
     protected abstract void initScaled();
 
@@ -35,7 +44,8 @@ public abstract class ScaledScreen extends Screen {
     protected final void init() {
         Ui.applyTheme();
         float wanted = BlockAtlasConfig.get().uiScale;
-        float fit = Math.min(width / 380f, height / 250f); // never scale so far the panel can't fit
+        // never scale so far the panel can't fit its minimum layout
+        float fit = Math.min(width / (float) minWidth(), height / (float) minHeight());
         scale = Math.max(0.5f, Math.min(wanted, fit));
         sw = Math.round(width / scale);
         sh = Math.round(height / scale);
